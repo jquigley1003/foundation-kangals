@@ -1,0 +1,7 @@
+{
+  "name": "foundationKangals",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
