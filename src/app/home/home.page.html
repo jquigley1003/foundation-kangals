@@ -1,0 +1,112 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true">
+  <div class="logo-home">
+    <img #logoFull src="../../assets/logos/FKlogo-full.png" >
+  </div>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col class="slide-container">
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-menu-button color="light"></ion-menu-button>
+          </ion-buttons>
+        </ion-toolbar>
+        <ion-slides [options]="slideOpts" pager="false">
+          <ion-slide>
+            <!-- <div class="slide-text">
+              <span class="trueno-outline-h1">GRAVITY FITNESS</span><br>
+              <span class="trueno-h1">ATLANTA'S GYM</span>
+            </div> -->
+            <img #mySlideImg1 src="../../assets/stageBackground.jpg" >
+          </ion-slide>
+          <ion-slide>
+            <!-- <div class="slide-text">
+              <span class="trueno-outline-h1">GRAVITY FITNESS</span><br>
+              <span class="trueno-h1">MIDTOWN GYM</span>
+            </div> -->
+            <img #mySlideImg2 src="../../assets/entranceBackground.jpg" >
+          </ion-slide>
+          <ion-slide>
+            <!-- <div class="slide-text">
+              <span class="trueno-outline-h1">GRAVITY FITNESS</span><br>
+              <span class="trueno-h1">PREMIER GYM</span>
+            </div> -->
+            <img #mySlideImg3 src="../../assets/stageBackground.jpg" >
+          </ion-slide>
+          <ion-slide>
+            <!-- <div class="slide-text">
+              <span class="trueno-outline-h1">GRAVITY FITNESS</span><br>
+              <span class="trueno-h1">COMMUNITY GYM</span>
+            </div> -->
+            <img #mySlideImg4 src="../../assets/entranceBackground.jpg" >
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+    <!-- BEGINNING OF FK -->
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <h1>Beginning of Foundation Kangals</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding brick-background">
+      <ion-col size="12">
+        <ion-row class="dark-shadow-background">
+          <ion-col size-xs="12" size-sm="6" class="ion-align-self-center">
+            <img style="display: block; margin: auto; width: 100%;"
+             src="../../assets/cujo/cujo-marisa.jpg">
+          </ion-col>
+          <ion-col size-xs="12" size-sm="6" class="ion-align-self-center ion-padding">
+            <p>
+              It started April 2020, when I decided to foster Cujo. Owning horses and livestock most of my life, 
+              I was never much of a dog person. I liked them, but they seemed like more responsibility 
+              than owning 5 horses, crazy as that sounds!
+            </p>
+            <p>
+              Long story short, Cujo gave me NO CHOICE. He laid in front of my truck until I 
+              put him in the back covered in fleas. Standing 6 feet tall and even under weight, Cujo still weighed around 180 lbs. 
+              Well, this over size wolf now had QUICKLY stole my entire heart, my land, and my home.
+            </p>
+          </ion-col>
+          <ion-col size="12" class="ion-padding">
+            <p>
+              They say Kangal is hard to train and I can see why. Some days are full with guests 
+              here on The Farm - kids camps, some rehab for special needs, and of course having family and friends around.
+              Having friends and family over, from elderly to children, the Kangal ALWAYS know who 
+              is friend or foe. They only bark or act aggressive to people that are here with no invitation 
+              or appointment. I'm not sure how they read my schedule...BUT THEY KNOW. Kangal are the most 
+              lovable family dogs, until its time to protect.</p>
+            <p>
+              For more information refer to 
+              <a href="https://en.m.wikipedia.org/wiki/Kangal_Shepherd_Dog" target="_blank">
+                this article under SIVAS KANGAL in Wikipedia.</a>
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <!-- END OF BEGINNING OF FK -->
+    <!-- CODE OF ETHICS-->
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <h1>Code of Ethics</h1>
+      </ion-col>
+    </ion-row>
+    <!-- END OF CODE OF ETHICS -->
+    <!-- HONOR OF THE BREED -->
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <h1>Honor of the Breed</h1>
+      </ion-col>
+    </ion-row>
+    <!-- END OF HONOR OF THE BREED -->
+  </ion-grid>
+</ion-content>

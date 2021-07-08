@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <img (click)="goHome()" src="../../assets/logos/FKlogo-full-small.png">
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-grid class="ion-no-padding">
+    <ion-row class="purchase-row">
+      <ion-col size="12" class="ion-no-padding">
+        <div class="purchaser-container">
+          <div class="purchaser-text-container">
+            <ion-row>
+              <ion-col class="ion-text-center">
+                <p #purchasersTitle class="purchasers-title"><strong>Purchashing a Kangal</strong></p>
+              </ion-col>
+            </ion-row>
+          </div>
+          <div class="slider-container">
+            <img src="../../assets/AtlantaMidtownPT1.jpg">
+          </div>
+        </div>   
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

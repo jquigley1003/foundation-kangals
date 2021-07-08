@@ -1,0 +1,90 @@
+ion-toolbar {
+  position: fixed;
+  --background: transparent;
+}
+
+ion-menu-button {
+  color: var(--ion-color-primary);
+}
+
+ion-button {
+  --background-hover: var(--ion-color-secondary);
+}
+
+.about-row {
+  padding-top: 5em;
+  background: var(--ion-color-light);
+}
+
+.about-subtitle {
+  opacity: 1;
+}
+
+.logo-bld {
+  display: inline-block;
+}
+
+.my-video {
+  width: 100%;
+}
+
+.about-container {
+  position: relative;
+  width: 100%;
+  background: var(--ion-color-primary);
+}
+
+.about-text-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 30%;
+}
+
+.about-text-container strong {
+  font-family: 'MuktaMahee Extra Light', Arial, Helvetica, sans-serif;
+  // font-size: 3.5vh;
+  font-size: 7vh;
+  color: black;
+	text-shadow: red 1px 1px 3px;
+}
+
+.about-text-container p {
+  font-family: 'MuktaMahee Extra Light', Arial, Helvetica, sans-serif;
+  font-size: 3vh;
+  // font-size: 2.5vh;
+  color: #fff;
+  margin: 0;
+}
+
+.about-text-container a {
+  text-decoration: none;
+}
+
+.slider-container {
+  z-index: 1;
+}
+
+.about-col {
+  font-family: 'MuktaMahee Extra Light', Arial, Helvetica, sans-serif;
+  background: var(--ion-color-secondary);
+}
+
+.about-col h1{
+  font-size: 3vh;
+  color: var(--ion-color-light);
+}
+
+.about-col h2 {
+  font-size: 2vh;
+  color: var(--ion-color-light);
+}
+
+.info-list {
+  background: rgba(var(--ion-color-secondary-rgb), 0);
+}
+
+.info-item {
+  font-family: 'MuktaMahee Extra Light', Arial, Helvetica, sans-serif;
+  --background: rgba(var(--ion-color-secondary-rgb), .5);;
+}
