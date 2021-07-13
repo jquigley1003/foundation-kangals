@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AnimationController, Animation } from '@ionic/angular';
+import { AnimationController, Animation, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-about-kangals',
@@ -14,7 +14,8 @@ export class AboutKangalsPage implements OnInit, AfterViewInit {
 
   constructor(
     private animationCtrl: AnimationController,
-    private router: Router
+    private router: Router,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -34,4 +35,21 @@ export class AboutKangalsPage implements OnInit, AfterViewInit {
   goHome() {
     this.router.navigate(['/home']);
   }
+
+  goToPhotos() {
+    this.router.navigate(['about-kangals/photos']);
+  }
+
+  async testClick() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'About Kangals',
+      subHeader: 'More Information will go here',
+      message: 'This is a test message.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
 }

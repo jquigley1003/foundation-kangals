@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: AboutKangalsPage
+  },
+  {
+    path: 'photos',
+    loadChildren: () => import('./photos/photos.module').then( m => m.PhotosPageModule)
   }
 ];
 

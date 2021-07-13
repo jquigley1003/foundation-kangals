@@ -4,11 +4,23 @@ ion-toolbar {
 }
 
 ion-menu-button {
-  color: var(--ion-color-primary);
+  --border-radius: 5px;
+  --color: var(--ion-color-light);
+  --background: var(--ion-color-primary);
+	--color-hover: var(--ion-color-secondary);
+	--background-hover: var(--ion-color-tertiary);
 }
 
 ion-button {
   --background-hover: var(--ion-color-secondary);
+}
+
+h1 {
+  font-family: 'Snell Roundhand Black', cursive;
+	font-size: 1.5em;
+  font-weight: bold;
+	color: black;
+	text-shadow: red 2px 2px 5px;
 }
 
 .about-row {
@@ -16,49 +28,27 @@ ion-button {
   background: var(--ion-color-light);
 }
 
-.about-subtitle {
-  opacity: 1;
-}
-
-.logo-bld {
-  display: inline-block;
-}
-
-.my-video {
-  width: 100%;
-}
-
-.about-container {
-  position: relative;
-  width: 100%;
-  background: var(--ion-color-primary);
-}
-
-.about-text-container {
+.home-logo {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 30%;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, -5%);
+  text-align: center;
 }
 
-.about-text-container strong {
-  font-family: 'MuktaMahee Extra Light', Arial, Helvetica, sans-serif;
-  // font-size: 3.5vh;
-  font-size: 7vh;
+.about-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-52%, -10%);
+  text-align: center;
+  font-size: 6vw;
   color: black;
 	text-shadow: red 1px 1px 3px;
 }
 
-.about-text-container p {
-  font-family: 'MuktaMahee Extra Light', Arial, Helvetica, sans-serif;
-  font-size: 3vh;
-  // font-size: 2.5vh;
-  color: #fff;
-  margin: 0;
-}
-
-.about-text-container a {
-  text-decoration: none;
+.about-subtitle {
+  opacity: 1;
 }
 
 .slider-container {
@@ -66,25 +56,44 @@ ion-button {
 }
 
 .about-col {
-  font-family: 'MuktaMahee Extra Light', Arial, Helvetica, sans-serif;
-  background: var(--ion-color-secondary);
+  
 }
 
 .about-col h1{
   font-size: 3vh;
-  color: var(--ion-color-light);
+  color: var(--ion-color-primary);
 }
 
 .about-col h2 {
-  font-size: 2vh;
-  color: var(--ion-color-light);
+  font-family: 'Snell Roundhand Black', cursive;
+	font-size: 3vh;
+  font-weight: bold;
+	color: var(--ion-color-secondary);
+	text-shadow: black 2px 2px 5px;
 }
 
 .info-list {
-  background: rgba(var(--ion-color-secondary-rgb), 0);
+  background: rgba(var(--ion-color-light-rgb), 0.5);
 }
 
 .info-item {
   font-family: 'MuktaMahee Extra Light', Arial, Helvetica, sans-serif;
-  --background: rgba(var(--ion-color-secondary-rgb), .5);;
+  --background: var(--ion-color-primary);
+}
+
+.white-background {
+	background-color: white;
+	color: var(--ion-color-primary);
+}
+
+.dark-shadow-background {
+	background-color: rgba(var(--ion-color-dark-rgb), .4);
+}
+
+.brick-background {
+	background-image: url('../../assets/background/brick.jpg');
+  background-attachment: fixed;
+	background-repeat: repeat;
+	background-position: center;
+	background-size: auto;
 }

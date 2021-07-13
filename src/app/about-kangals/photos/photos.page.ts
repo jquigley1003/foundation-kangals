@@ -3,14 +3,14 @@ import { Router } from '@angular/router';
 import { AnimationController, Animation } from '@ionic/angular';
 
 @Component({
-  selector: 'app-purchase-kangals',
-  templateUrl: './purchase-kangals.page.html',
-  styleUrls: ['./purchase-kangals.page.scss'],
+  selector: 'app-photos',
+  templateUrl: './photos.page.html',
+  styleUrls: ['./photos.page.scss'],
 })
-export class PurchaseKangalsPage implements OnInit, AfterViewInit {
-  @ViewChild('purchaseTitle') purchaseTitle: ElementRef;
+export class PhotosPage implements OnInit, AfterViewInit {
+  @ViewChild('photosTitle') photosTitle: ElementRef;
 
-  purchaseTitleAnim: Animation;
+  photosTitleAnim: Animation;
 
   constructor(
     private animationCtrl: AnimationController,
@@ -21,14 +21,14 @@ export class PurchaseKangalsPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.purchaseTitleAnim = this.animationCtrl.create('myPurchaseTitleAnim');
-    this.purchaseTitleAnim
-      .addElement(this.purchaseTitle.nativeElement)
+    this.photosTitleAnim = this.animationCtrl.create('myPhotosTitleAnim');
+    this.photosTitleAnim
+      .addElement(this.photosTitle.nativeElement)
       .duration(2000)
       .fromTo('transform', 'scale(0)', 'scale(1)')
       .fromTo('opacity', '0', '1');
 
-    this.purchaseTitleAnim.play();
+    this.photosTitleAnim.play();
   }
 
   goHome() {

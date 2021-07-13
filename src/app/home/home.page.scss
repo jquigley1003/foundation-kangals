@@ -4,27 +4,33 @@ ion-toolbar {
 }
 
 ion-menu-button {
-  --background: rgba(var(--ion-color-primary-rgb), 0.55);
+	--border-radius: 5px;
+  --color: var(--ion-color-light);
+  --background: var(--ion-color-primary);
+	--color-hover: var(--ion-color-secondary);
+	--background-hover: var(--ion-color-tertiary);
 }
 
 h1 {
-	font-size: 1.5em;
+  font-family: 'Snell Roundhand Black', cursive;
+	font-size: 2.5em;
+  font-weight: bold;
 	color: black;
-	text-shadow: red 1px 1px 3px;
+	text-shadow: red 2px 2px 5px;
 }
 
 a {
 	color: var(--ion-color-secondary);
-	text-shadow: black 2px 2px 2px;
+	text-shadow: black 1px 1px 2px;
 }
 
 .logo-home {
   position: absolute;
-  top: 2%;
+  top: 0%;
   left: 50%;
   width: auto;
   height: auto;
-  transform: translate(-50%, 0%);
+  transform: translate(-50%, 50%);
   z-index: 10;
 }
 
@@ -32,10 +38,6 @@ a {
   display: block;
   margin: auto;
   width: 100%;
-}
-
-.slide-container {
-  background: darkblue;
 }
 
 .slide-text {
@@ -53,16 +55,19 @@ a {
 	color: var(--ion-color-light);
 }
 
+.white-background {
+	background-color: white;
+	color: var(--ion-color-primary);
+}
+
 .dark-shadow-background {
 	background-color: rgba(var(--ion-color-dark-rgb), .4);
 }
 
 .brick-background {
-	color: white;
-	font-size: 1.2em;
-	text-shadow: black 2px 2px 3px;
 	background-image: url('../../assets/background/brick.jpg');
-	background-repeat:repeat;
+  background-attachment: fixed;
+	background-repeat: repeat;
 	background-position: center;
 	background-size: auto;
 }

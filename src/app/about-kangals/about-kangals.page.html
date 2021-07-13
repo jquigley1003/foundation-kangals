@@ -1,27 +1,22 @@
-<ion-header>
-  <ion-toolbar>
-    <img (click)="goHome()" src="../../assets/logos/FKlogo-full-small.png">
-    <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
 <ion-content [fullscreen]="true">
-  <ion-grid class="ion-no-padding">
-    <ion-row class="about-row">
-      <ion-col size="12" class="ion-no-padding">
-        <div class="about-container">
-          <div class="about-text-container">
-            <ion-row>
-              <ion-col class="ion-text-center">
-                <p #aboutTitle class="about-title"><strong>About Kangals</strong></p>
-              </ion-col>
-            </ion-row>
-          </div>
-          <div class="slider-container">
-            <img src="../../assets/AtlantaMidtownPT2.jpg">
-          </div>
-        </div>   
+  <ion-grid class="brick-background ion-no-padding ion-no-margin">
+    <ion-row  class="ion-no-padding ion-no-margin">
+      <ion-col size="12" class="ion-no-padding ion-no-margin">
+        <ion-toolbar>
+          <ion-buttons slot="end" class="ion-padding-end">
+            <ion-menu-button color="secondary"></ion-menu-button>
+          </ion-buttons>
+          <!-- <img class="ion-padding" (click)="goHome()"
+            src="../../assets/logos/FKlogo-full-small50px.png">  -->
+        </ion-toolbar>
+        <div class="home-logo">
+          <img class="ion-padding" (click)="goHome()"
+            src="../../assets/logos/FKlogo-full-350px.png"> 
+        </div>
+        <div class="about-title">
+          <h1 #aboutTitle>About Kangals</h1>
+        </div>
+        <img src="../../assets/cujo/cujo-sunset.jpg">
       </ion-col>
     </ion-row>
     <ion-row>
@@ -29,25 +24,33 @@
         <ion-row>
           <ion-col size-xl="6" offset-xl="3">
             <ion-list class="info-list">
-              <ion-item 
+              <ion-item button (click)="testClick()"
               class="ion-margin info-item" lines="none">
                 <h2>About the Breed</h2>
-                <ion-button fill="outline" slot="end">See Info</ion-button>
+                <ion-thumbnail slot="end">
+                  <img src="../../assets/logos/paw-print.png">
+                </ion-thumbnail>
               </ion-item>
-              <ion-item  
+              <ion-item button (click)="testClick()"
               class="ion-margin info-item" lines="none">
                 <h2>What is Required to Own a Kangal</h2>
-                <ion-button fill="outline" slot="end">See Info</ion-button>
+                <ion-thumbnail slot="end">
+                  <img src="../../assets/logos/paw-print.png">
+                </ion-thumbnail>
               </ion-item>
-              <ion-item 
+              <ion-item button (click)="goToPhotos()"
               class="ion-margin info-item" lines="none">
                 <h2>Photos</h2>
-                <ion-button fill="outline" slot="end">See Info</ion-button>
+                <ion-thumbnail slot="end">
+                  <img src="../../assets/logos/paw-print.png">
+                </ion-thumbnail>
               </ion-item>
-              <ion-item 
+              <ion-item button (click)="testClick()"
               class="ion-margin info-item" lines="none">
                 <h2>Videos</h2>
-                <ion-button fill="outline" slot="end">See Info</ion-button>
+                <ion-thumbnail slot="end">
+                  <img src="../../assets/logos/paw-print.png">
+                </ion-thumbnail>
               </ion-item>
             </ion-list>
           </ion-col>

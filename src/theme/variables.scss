@@ -225,3 +225,12 @@
     --ion-card-background: #1e1e1e;
   }
 }
+
+/**  custom fonts **/
+
+@font-face {
+  font-family: 'Snell Roundhand Black';
+  font-style: normal;
+  font-weight: bold;
+  src: url('../assets/fonts/SnellRoundhand-BlackScript.otf');
+}
