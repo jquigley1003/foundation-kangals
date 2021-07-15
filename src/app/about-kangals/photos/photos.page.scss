@@ -15,12 +15,29 @@ ion-button {
   --background-hover: var(--ion-color-secondary);
 }
 
+ion-slides {
+  --scroll-bar-background: var(--ion-color-light);
+  margin: 5px 5px 5px 5px;
+  background: var(--ion-color-primary);
+  img {
+    padding: 20px 0px;
+  }
+}
+
 h1 {
   font-family: 'Snell Roundhand Black', cursive;
 	font-size: 1.5em;
   font-weight: bold;
 	color: black;
-	text-shadow: red 2px 2px 5px;
+	text-shadow: var(--ion-color-light) 2px 2px 3px;
+}
+
+h2 {
+  font-family: 'Snell Roundhand Black', cursive;
+	font-size: 2.5em;
+  font-weight: bold;
+	color: black;
+	text-shadow: red 2px 2px 5px; 
 }
 
 .home-logo {
@@ -31,6 +48,11 @@ h1 {
   text-align: center;
 }
 
+.title-cap{
+  color: var(--ion-color-tertiary);
+	text-shadow: var(--ion-color-light) 2px 2px 3px;
+}
+
 .photos-title {
   position: absolute;
   top: 50%;
@@ -38,8 +60,6 @@ h1 {
   transform: translate(-52%, -10%);
   text-align: center;
   font-size: 6vw;
-  color: black;
-	text-shadow: red 1px 1px 3px;
 }
 
 .photos-subtitle {

@@ -20,12 +20,7 @@ h1 {
 	font-size: 1.5em;
   font-weight: bold;
 	color: black;
-	text-shadow: red 2px 2px 5px;
-}
-
-.purchase-row {
-  padding-top: 5em;
-  background: var(--ion-color-light);
+	text-shadow: var(--ion-color-light) 2px 2px 3px;
 }
 
 .home-logo {
@@ -36,6 +31,11 @@ h1 {
   text-align: center;
 }
 
+.title-cap{
+  color: var(--ion-color-tertiary);
+	text-shadow: var(--ion-color-light) 2px 2px 3px;
+}
+
 .purchase-title {
   position: absolute;
   top: 50%;
@@ -43,8 +43,6 @@ h1 {
   transform: translate(-52%, -10%);
   text-align: center;
   font-size: 6vw;
-  color: black;
-	text-shadow: red 1px 1px 3px;
 }
 
 .purchaser-subtitle {
