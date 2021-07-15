@@ -1,3 +1,7 @@
+ion-content {
+  --background: none;
+}
+
 ion-toolbar {
   position: fixed;
   --background: transparent;
@@ -53,8 +57,12 @@ h1 {
   z-index: 1;
 }
 
+.no-background {
+  background: none;
+}
+
 .about-col {
-  
+  background: none;
 }
 
 .about-col h1{

@@ -1,6 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AnimationController, Animation } from '@ionic/angular';
+
+import { AnimationController, Animation, ModalController, IonSlides } from '@ionic/angular';
+
+import { PhotoModalComponent } from 'src/app/shared/modals/photo-modal/photo-modal.component';
 
 @Component({
   selector: 'app-photos',
@@ -9,11 +12,18 @@ import { AnimationController, Animation } from '@ionic/angular';
 })
 export class PhotosPage implements OnInit, AfterViewInit {
   @ViewChild('photosTitle') photosTitle: ElementRef;
+  @ViewChild('cujoPics') cujoSlider: IonSlides;
+  @ViewChild('keviPics') keviSlider: IonSlides;
+  @ViewChild('litterAPics') litterASlider: IonSlides;
 
+  showCujoNav = false;
+  showKeviNav = false;
+  showLitterANav = false;
   photosTitleAnim: Animation;
+
   sliderOpts = {
     zoom: false,
-    slidesPerView: 1.5,
+    slidesPerView: 1,
     centeredSlides: true,
     spaceBetween: 20
   };
@@ -219,7 +229,8 @@ export class PhotosPage implements OnInit, AfterViewInit {
 
   constructor(
     private animationCtrl: AnimationController,
-    private router: Router
+    private router: Router,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -234,6 +245,35 @@ export class PhotosPage implements OnInit, AfterViewInit {
       .fromTo('opacity', '0', '1');
 
     this.photosTitleAnim.play();
+  }
+
+  openPreview(image) {
+    this.modalController.create({
+      cssClass: 'fullscreen',
+      swipeToClose: true,
+      component: PhotoModalComponent,
+      componentProps: {
+        img: image
+      }
+    }).then(modal => {
+      modal.present();
+    });
+  }
+
+  toPrevSlide(slider) {
+    slider.slidePrev();
+  }
+
+  toNextSlide(slider) {
+    slider.slideNext();
+  }
+
+  showSlideButtons(nav) {
+    nav = true;
+  }
+
+  hideSlideButtons(nav) {
+    nav = false;
   }
 
   goHome() {

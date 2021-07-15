@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true">
-  <ion-grid class="brick-background ion-no-padding ion-no-margin">
+  <ion-grid class="ion-no-padding ion-no-margin">
     <ion-row  class="ion-no-padding ion-no-margin">
       <ion-col size="12" class="ion-no-padding ion-no-margin">
         <ion-toolbar>
@@ -20,10 +20,10 @@
         <img src="../../assets/cujo/cujo-sunset.jpg">
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row class="no-background">
       <ion-col class="ion-no-margin ion-padding about-col">
-        <ion-row>
-          <ion-col size-xl="6" offset-xl="3">
+        <ion-row class="no-background">
+          <ion-col size-xl="6" offset-xl="3" class="no-background">
             <ion-list class="info-list">
               <ion-item button (click)="testClick()"
               class="ion-margin info-item" lines="none">

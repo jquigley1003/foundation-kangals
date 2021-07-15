@@ -1,3 +1,8 @@
+ion-content {
+  --background: none;
+}
+
+
 ion-toolbar {
   position: fixed;
   --background: transparent;
@@ -60,14 +65,10 @@ a {
 	color: var(--ion-color-primary);
 }
 
-.dark-shadow-background {
-	background-color: rgba(var(--ion-color-dark-rgb), .4);
+.no-background {
+  background: none;
 }
 
-.brick-background {
-	background-image: url('../../assets/background/brick.jpg');
-  background-attachment: fixed;
-	background-repeat: repeat;
-	background-position: center;
-	background-size: auto;
+.dark-shadow-background {
+	background-color: rgba(var(--ion-color-dark-rgb), .4);
 }

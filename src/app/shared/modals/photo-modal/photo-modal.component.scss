@@ -1,0 +1,16 @@
+ion-content {
+	--background: rgba(var(--ion-color-dark-rgb), 0.7);
+}
+
+ion-slides {
+	--background: none;
+	height: 80%;
+}
+
+.close-fake {
+	--background: transparent;
+	ion-icon {
+			font-size: 2rem;
+	}
+	margin-top: 40px;
+}

@@ -1,3 +1,7 @@
+ion-content {
+  --background: none;
+}
+
 ion-toolbar {
   position: fixed;
   --background: transparent;
@@ -18,9 +22,12 @@ ion-button {
 ion-slides {
   --scroll-bar-background: var(--ion-color-light);
   margin: 5px 5px 5px 5px;
-  background: var(--ion-color-primary);
+  background: none;
   img {
     padding: 20px 0px;
+  }
+  p {
+    color: var(--ion-color-light);
   }
 }
 
@@ -63,5 +70,25 @@ h2 {
 }
 
 .photos-subtitle {
-  opacity: 1;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/**** BACKGROUNDS *****/
+
+.wood-background {
+	background-image:url('../../../assets/frame2.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+	color: var(--ion-color-light);
+}
+
+.white-background {
+	background-color: white;
+	color: var(--ion-color-primary);
+}
+
+.no-background {
+  background: none;
 }
