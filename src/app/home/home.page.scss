@@ -26,7 +26,7 @@ h1 {
 
 a {
 	color: var(--ion-color-secondary);
-	text-shadow: black 1px 1px 2px;
+	text-shadow: white 1px 1px 1px;
 }
 
 .logo-home {
@@ -56,7 +56,7 @@ a {
 /**** BACKGROUNDS *****/
 
 .gray-background {
-	background-color: #3e414c;
+	background-color: var(--ion-color-medium);
 	color: var(--ion-color-light);
 }
 

@@ -33,6 +33,9 @@ ion-slides {
   img {
     padding: 20px 0px;
   }
+  p {
+    color: var(--ion-color-light);
+  }
 }
 
 h1 {
@@ -51,9 +54,9 @@ h2 {
 	text-shadow: red 2px 2px 5px; 
 }
 
-.secondary-color {
-  color: var(--ion-color-secondary);
-  text-shadow: 1px 1px 1px var(--ion-color-light);
+a {
+	color: var(--ion-color-secondary);
+	text-shadow: white 1px 1px 1px;
 }
 
 .home-logo {
@@ -69,7 +72,7 @@ h2 {
 	text-shadow: var(--ion-color-light) 2px 2px 3px;
 }
 
-.photos-title {
+.breed-title {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -78,15 +81,9 @@ h2 {
   font-size: 6vw;
 }
 
-.photos-subtitle {
+.breed-subtitle {
   font-size: 1.5em;
   font-weight: bold;
-}
-
-.image-title {
-  font-weight: bold;
-  color: var(--ion-color-light);
-	text-shadow: black 2px 2px 5px; 
 }
 
 /**** BACKGROUNDS *****/
@@ -99,19 +96,14 @@ h2 {
 	color: var(--ion-color-light);
 }
 
-.brick-background {
-	background-image: url('../../../assets/background/gray-brick.jpg');
-  background-repeat: repeat;
-  background-position: center;
+.gray-background {
+	background-color: var(--ion-color-medium);
 	color: var(--ion-color-light);
-  border: 5px solid rgba(var(--ion-color-light-rgb), 0.3);
-  border-radius: 10px;
 }
 
 .white-background {
-	background-color: rgba(var(--ion-color-light-rgb), 0.5);
-  border: 1px solid rgba(var(--ion-color-light-rgb), 0.5);
-  border-radius: 10px;
+	background-color: white;
+	color: var(--ion-color-primary);
 }
 
 .no-background {

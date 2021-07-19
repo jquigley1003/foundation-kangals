@@ -72,10 +72,10 @@ h1 {
 
 .about-col h2 {
   font-family: 'Snell Roundhand Black', cursive;
-	font-size: 3vh;
+	font-size: 5vh;
   font-weight: bold;
-	color: var(--ion-color-secondary);
-	text-shadow: black 2px 2px 5px;
+	color: black;
+	text-shadow: var(--ion-color-tertiary) 1px 1px 1px;
 }
 
 .info-list {
@@ -83,8 +83,8 @@ h1 {
 }
 
 .info-item {
-  font-family: 'MuktaMahee Extra Light', Arial, Helvetica, sans-serif;
-  --background: var(--ion-color-primary);
+  --background: url('../../assets/background/gray-brick.jpg');
+  background-repeat: repeat;
 }
 
 .white-background {
@@ -97,9 +97,8 @@ h1 {
 }
 
 .brick-background {
-	background-image: url('../../assets/background/brick.jpg');
-  background-attachment: fixed;
-	background-repeat: repeat;
-	background-position: center;
-	background-size: auto;
+  width: 100%;
+	background-image: url('../../assets/background/gray-brick.jpg');
+  background-repeat: repeat;
+
 }

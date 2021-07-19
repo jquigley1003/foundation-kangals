@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AnimationController, Animation, ModalController, IonSlides } from '@ionic/angular';
+import { AnimationController, Animation, ModalController, IonSlides, NavController } from '@ionic/angular';
 
 import { PhotoModalComponent } from 'src/app/shared/modals/photo-modal/photo-modal.component';
 
@@ -230,6 +230,7 @@ export class PhotosPage implements OnInit, AfterViewInit {
   constructor(
     private animationCtrl: AnimationController,
     private router: Router,
+    private navCtrl: NavController,
     private modalController: ModalController
   ) { }
 
@@ -278,5 +279,10 @@ export class PhotosPage implements OnInit, AfterViewInit {
 
   goHome() {
     this.router.navigate(['/home']);
+  }
+
+  goToAboutKangals() {
+    // this.router.navigate(['about-kangals']);
+    this.navCtrl.navigateBack('about-kangals');
   }
 }
