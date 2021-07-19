@@ -12,7 +12,7 @@ export class FooterComponent implements OnInit {
   ngOnInit() {}
 
   callFK() {
-    window.open(`tel:404-486-0506`, '_system');
+    window.open(`tel:678-262-7662`, '_system');
   }
 
 }
