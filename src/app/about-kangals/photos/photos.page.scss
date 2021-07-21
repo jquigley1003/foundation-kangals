@@ -7,14 +7,6 @@ ion-toolbar {
   --background: transparent;
 }
 
-ion-menu-button {
-  --border-radius: 5px;
-  --color: var(--ion-color-light);
-  --background: var(--ion-color-primary);
-	--color-hover: var(--ion-color-secondary);
-	--background-hover: var(--ion-color-tertiary);
-}
-
 ion-button {
   --background-hover: var(--ion-color-secondary);
 }

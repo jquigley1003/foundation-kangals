@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { BreedPageRoutingModule } from './breed-routing.module';
+import { RequirementToOwnPageRoutingModule } from './requirement-to-own-routing.module';
 
-import { BreedPage } from './breed.page';
+import { RequirementToOwnPage } from './requirement-to-own.page';
 import { FooterModule } from 'src/app/shared/components/footer/footer.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { FooterModule } from 'src/app/shared/components/footer/footer.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    BreedPageRoutingModule,
+    RequirementToOwnPageRoutingModule,
     FooterModule
   ],
-  declarations: [BreedPage]
+  declarations: [RequirementToOwnPage]
 })
-export class BreedPageModule {}
+export class RequirementToOwnPageModule {}

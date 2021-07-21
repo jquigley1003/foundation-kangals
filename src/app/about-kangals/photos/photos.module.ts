@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { PhotosPageRoutingModule } from './photos-routing.module';
 
 import { PhotosPage } from './photos.page';
+import { FooterModule } from 'src/app/shared/components/footer/footer.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PhotosPageRoutingModule
+    PhotosPageRoutingModule,
+    FooterModule
   ],
   declarations: [PhotosPage]
 })

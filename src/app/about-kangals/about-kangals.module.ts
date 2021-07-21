@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AboutKangalsPageRoutingModule } from './about-kangals-routing.module';
 
 import { AboutKangalsPage } from './about-kangals.page';
+import { FooterModule } from '../shared/components/footer/footer.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AboutKangalsPageRoutingModule
+    AboutKangalsPageRoutingModule,
+    FooterModule
   ],
   declarations: [AboutKangalsPage]
 })

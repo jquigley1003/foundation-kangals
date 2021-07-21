@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'breed',
     loadChildren: () => import('./breed/breed.module').then( m => m.BreedPageModule)
+  },
+  {
+    path: 'requirement-to-own',
+    loadChildren: () => import('./requirement-to-own/requirement-to-own.module').then( m => m.RequirementToOwnPageModule)
   }
 ];
 

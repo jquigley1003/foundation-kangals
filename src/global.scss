@@ -40,3 +40,14 @@ ion-modal.fullscreen {
   --border-radius: 0;
 	--background: transparent;
 }
+
+ion-menu-button {
+  --border-radius: 1px;
+  --color: var(--ion-color-secondary);
+  --background: black;
+	--color-hover: var(--ion-color-light);
+	--background-hover: var(--ion-color-tertiary);
+  --background-hover-opacity: 0.1;
+  border: 2px solid rgba(var(--ion-color-tertiary-rgb), 0.7);
+  border-radius: 5px;
+}

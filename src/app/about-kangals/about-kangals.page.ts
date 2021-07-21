@@ -40,6 +40,10 @@ export class AboutKangalsPage implements OnInit, AfterViewInit {
     this.router.navigate(['about-kangals/breed']);
   }
 
+  goToRequirement() {
+    this.router.navigate(['about-kangals/requirement-to-own']);
+  }
+
   goToPhotos() {
     this.router.navigate(['about-kangals/photos']);
   }

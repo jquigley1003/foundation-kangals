@@ -8,14 +8,6 @@ ion-toolbar {
   --background: transparent;
 }
 
-ion-menu-button {
-	--border-radius: 5px;
-  --color: var(--ion-color-light);
-  --background: var(--ion-color-primary);
-	--color-hover: var(--ion-color-secondary);
-	--background-hover: var(--ion-color-tertiary);
-}
-
 h1 {
   font-family: 'Snell Roundhand Black', cursive;
 	font-size: 2.5em;
@@ -60,9 +52,13 @@ a {
 	color: var(--ion-color-light);
 }
 
+.gray-trnsp-background {
+  background-color: rgba(var(--ion-color-medium-rgb), .7);
+  border-radius: 10px;
+}
+
 .white-background {
-	background-color: white;
-	color: var(--ion-color-primary);
+  background-color: rgba(var(--ion-color-light-rgb), .7);
 }
 
 .no-background {
