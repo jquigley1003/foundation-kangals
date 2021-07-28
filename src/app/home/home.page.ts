@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AnimationController, Animation, IonSlides } from '@ionic/angular';
 
 @Component({
@@ -8,7 +8,7 @@ import { AnimationController, Animation, IonSlides } from '@ionic/angular';
 })
 export class HomePage implements OnInit, AfterViewInit {
   @ViewChild(IonSlides) slides: IonSlides;
-  @ViewChild('logoFull') logoFull: ElementRef;
+  @ViewChild('logoImg',{ read: ElementRef }) logoImg: ElementRef;
   @ViewChild('mySlideImg1') mySlideImg1: ElementRef;
   @ViewChild('mySlideImg2') mySlideImg2: ElementRef;
   @ViewChild('mySlideImg3') mySlideImg3: ElementRef;
@@ -18,7 +18,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
   slideOpts = {
     autoplay: {
-      delay: 5000,
+      delay: 7000,
     },
     loop: true,
     on: {
@@ -89,22 +89,22 @@ export class HomePage implements OnInit, AfterViewInit {
 
   constructor(
     private animationCtrl: AnimationController
-  ) { }
+  ) {}
 
   ngOnInit() {
   }
 
   ngAfterViewInit() {
-    this.logoFullAnim = this.animationCtrl.create('myLogoFullAnim');
-    this.logoFullAnim
-      .addElement(this.logoFull.nativeElement)
-      .duration(3000)
-      .keyframes([
-        { offset: 0, transform: 'scale(0.1)', opacity: 0 },
-        { offset: 0.5, transform: 'scale(0.5)', opacity: 0.5 },
-        { offset: 1, transform: 'scale(1)', opacity: 1 }
-      ]);
-      this.logoFullAnim.play();
+    this.logoFullAnim = this.animationCtrl.create('myLogoFullAnim')
+    .addElement(this.logoImg.nativeElement)
+    .duration(7000)
+    .keyframes([
+      { offset: 0, transform: 'scale(0.1)', opacity: 0 },
+      { offset: 0.3, transform: 'scale(0.5)', opacity: 0.7 },
+      { offset: 0.6, transform: 'scale(0.9)', opacity: 1 },
+      { offset: 0.8, transform: 'scale(0.7)', opacity: 1 },
+      { offset: 1, transform: 'scale(0.4) translate(-70%, -55%)', opacity: 1 }
+    ]);
+    this.logoFullAnim.play();
   }
-
 }

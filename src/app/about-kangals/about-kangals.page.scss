@@ -12,8 +12,9 @@ ion-list {
 }
 
 ion-item {
-  --background: rgba(var(--ion-color-light-rgb), 0.7);
+  --background: rgba(var(--ion-color-medium-rgb), 0.7);
   --background-hover-opacity: 0.2;
+  border: 2px solid rgba(var(--ion-color-light-rgb), .7);
   border-radius: 10px;
   
 }
@@ -82,7 +83,7 @@ h2 {
 	font-size: 5vh;
   font-weight: bold;
 	color: black;
-	text-shadow: var(--ion-color-tertiary) 1px 1px 1px;
+	text-shadow: var(--ion-color-light) 1px 1px 5px;
 }
 
 /**** BACKGROUNDS *****/
@@ -99,6 +100,8 @@ h2 {
 
 .white-background {
   background-color: rgba(var(--ion-color-light-rgb), .7);
+  border: 2px solid rgba(var(--ion-color-medium-rgb), .7);
+  border-radius: 10px;
 }
 
 .dark-shadow-background {

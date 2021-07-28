@@ -23,7 +23,7 @@ export class AboutKangalsPage implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.aboutTitleAnim = this.animationCtrl.create('myAboutTitleAnim');
-    this.aboutTitleAnim 
+    this.aboutTitleAnim
       .addElement(this.aboutTitle.nativeElement)
       .duration(2000)
       .fromTo('transform', 'scale(0)', 'scale(1)')

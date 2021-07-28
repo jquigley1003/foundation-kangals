@@ -21,20 +21,23 @@ a {
 	text-shadow: white 1px 1px 1px;
 }
 
-.logo-home {
+.logo-container {
   position: absolute;
-  top: 0%;
-  left: 50%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, 50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  // border: 3px solid green;
   z-index: 10;
 }
 
-.logo-home img {
+.logo-img {
   display: block;
-  margin: auto;
+  margin: 0px auto;
   width: 100%;
+  // opacity: 0;
+  transform: scale(0.4) translate(-70%, -55%);
 }
 
 .slide-text {
@@ -59,6 +62,8 @@ a {
 
 .white-background {
   background-color: rgba(var(--ion-color-light-rgb), .7);
+  border: 2px solid rgba(var(--ion-color-medium-rgb), .7);
+  border-radius: 10px;
 }
 
 .no-background {
