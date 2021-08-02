@@ -2,13 +2,24 @@ ion-content {
   --background: none;
 }
 
-
 ion-toolbar {
   position: fixed;
   --background: transparent;
 }
 
+ion-item { 
+  --background: transparent;
+}
+
 h1 {
+  font-family: 'Snell Roundhand Black', cursive;
+	font-size: 2.5em;
+  font-weight: bold;
+	color: black;
+	text-shadow: red 2px 2px 5px;
+}
+
+h2 {
   font-family: 'Snell Roundhand Black', cursive;
 	font-size: 2.5em;
   font-weight: bold;
@@ -32,6 +43,13 @@ a {
   z-index: 10;
 }
 
+.social-container {
+  position: absolute;
+  top: 100%;
+  left: 100%;
+  z-index: 11;
+}
+
 .logo-img {
   display: block;
   margin: 0px auto;
@@ -46,6 +64,51 @@ a {
   top: 50%;
   color: white;
   transform: translate(-50% -50%);
+}
+
+// MENU CARDS
+
+@media(hover: hover) and (pointer: fine) {
+  .menu-card:hover {
+    font-family: 'Trueno Black';
+    cursor: pointer;
+  }
+}
+
+.menu-card {
+  --background: rgba(var(--ion-color-medium-rgb), 0.7);
+  border: 2px solid rgba(var(--ion-color-light-rgb), .7);
+  border-radius: 10px;
+}
+
+.menu-card .menu-header {
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-header img {
+  padding-left: 10px;
+  height: 10%;
+  width: 10%;
+}
+
+.menu-card-title {
+  text-align: center;
+  font-family: 'Snell Roundhand Black', cursive;
+	font-size: 4vh;
+  font-weight: bold;
+	color: black;
+	text-shadow: var(--ion-color-light) 1px 1px 5px;
+}
+
+.menu-card-subtitle {
+  // position: absolute;
+  // top: 52%;
+  font-size: 1.0em;
+  width: 100%;
+  color: #fff;
 }
 
 /**** BACKGROUNDS *****/

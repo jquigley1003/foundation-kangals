@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { IonList, IonMenu } from '@ionic/angular';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  @ViewChild(IonMenu) ionMenu: IonMenu;
+
   public appPages = [
     {
       title: 'Home',
@@ -23,4 +26,8 @@ export class AppComponent {
     }
   ];
   constructor() {}
+
+  closeMenu() {
+    this.ionMenu.close();
+  }
 }

@@ -1,5 +1,9 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { AnimationController, Animation, IonSlides } from '@ionic/angular';
+import { DetectMobileService } from '../shared/services/detect-mobile.service';
+
+
 
 @Component({
   selector: 'app-home',
@@ -13,8 +17,13 @@ export class HomePage implements OnInit, AfterViewInit {
   @ViewChild('mySlideImg2') mySlideImg2: ElementRef;
   @ViewChild('mySlideImg3') mySlideImg3: ElementRef;
   @ViewChild('mySlideImg4') mySlideImg4: ElementRef;
+  @ViewChild('aboutKangals') myAboutKangals: ElementRef;
+  @ViewChild('purchaseKangals') myPurchaseKangals: ElementRef;
 
   logoFullAnim: Animation;
+  aboutKangalsAnim: Animation;
+  purchaseKangalsAnim: Animation;
+  enableScroll: boolean;
 
   slideOpts = {
     autoplay: {
@@ -88,10 +97,17 @@ export class HomePage implements OnInit, AfterViewInit {
   };
 
   constructor(
-    private animationCtrl: AnimationController
+    private animationCtrl: AnimationController,
+    private detectMobileService: DetectMobileService,
+    private router: Router
   ) {}
 
+  ionViewWillEnter() {
+    this.logoFullAnim.play();
+  }
+
   ngOnInit() {
+    this.detectMobileService.checkForMobile();
   }
 
   ngAfterViewInit() {
@@ -105,6 +121,57 @@ export class HomePage implements OnInit, AfterViewInit {
       { offset: 0.8, transform: 'scale(0.7)', opacity: 1 },
       { offset: 1, transform: 'scale(0.4) translate(-70%, -55%)', opacity: 1 }
     ]);
-    this.logoFullAnim.play();
+    // this.logoFullAnim.play();
+
+    if(this.detectMobileService.hasTouchScreen) {
+      this.enableScroll = true;
+      console.log('This device is mobile. Mobile = ', this.detectMobileService.hasTouchScreen);
+    } else {
+      this.enableScroll = false;
+      console.log('This device is desktop. Mobile = ', this.detectMobileService.hasTouchScreen);
+    }
+
+    this.aboutKangalsAnim = this.animationCtrl.create('myAboutKangalsAnim');
+    this.aboutKangalsAnim
+      .addElement(this.myAboutKangals.nativeElement)
+      .duration(7000)
+      .keyframes([
+        { offset: 0, transform: 'scale(1)' },
+        { offset: 0.5, transform: 'scale(2)' },
+        { offset: 1, transform: 'scale(1)' }
+      ]);
+
+    this.purchaseKangalsAnim = this.animationCtrl.create('myPurchaseKangalsAnim');
+    this.purchaseKangalsAnim
+      .addElement(this.myPurchaseKangals.nativeElement)
+      .duration(7000)
+      .keyframes([
+        { offset: 0, transform: 'scale(1)' },
+        { offset: 0.5, transform: 'scale(2)' },
+        { offset: 1, transform: 'scale(1)' }
+      ]);
+  }
+
+  async aboutKangalsHover() {
+    await this.stopAllMenuAnimations();
+    this.aboutKangalsAnim.play();
+  }
+
+  async purchaseKangalsHover() {
+    await this.stopAllMenuAnimations();
+    this.purchaseKangalsAnim.play();
+  }
+
+  stopAllMenuAnimations() {
+    this.aboutKangalsAnim.stop();
+    this.purchaseKangalsAnim.stop();
+  }
+
+  goToAboutKangals() {
+    this.router.navigate(['/about-kangals']);
+  }
+
+  goToPurchaseKangals() {
+    this.router.navigate(['/purchase-kangals']);
   }
 }
