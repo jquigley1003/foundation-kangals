@@ -1,0 +1,115 @@
+ion-content {
+  --background: none;
+}
+
+ion-toolbar {
+  position: fixed;
+  --background: transparent;
+}
+
+ion-button {
+  --background-hover: var(--ion-color-secondary);
+}
+
+ion-fab-button {
+  --border-style: solid;
+  --border-width: 2px;
+  --border-color: var(--ion-color-secondary);
+  --box-shadow: 2px 2px 5px var(--ion-color-secondary);
+}
+
+ion-slides {
+  --scroll-bar-background: var(--ion-color-light);
+  margin: 5px 5px 5px 5px;
+  background: none;
+  img {
+    padding: 20px 0px;
+  }
+}
+
+h1 {
+  font-family: 'Snell Roundhand Black', cursive;
+	font-size: 1.5em;
+  font-weight: bold;
+	color: black;
+	text-shadow: var(--ion-color-light) 2px 2px 3px;
+}
+
+h2 {
+  font-family: 'Snell Roundhand Black', cursive;
+	font-size: 2.5em;
+  font-weight: bold;
+	color: black;
+	text-shadow: red 2px 2px 5px; 
+}
+
+.secondary-color {
+  color: var(--ion-color-secondary);
+  text-shadow: 1px 1px 1px var(--ion-color-light);
+}
+
+.home-logo {
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, -5%);
+  text-align: center;
+}
+
+.title-cap{
+  color: var(--ion-color-tertiary);
+	text-shadow: var(--ion-color-light) 2px 2px 3px;
+}
+
+.vimeo-container {
+	padding-top: 10px;
+}
+
+.videos-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-52%, -10%);
+  text-align: center;
+  font-size: 6vw;
+}
+
+.videos-subtitle {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.image-title {
+  font-weight: bold;
+  color: var(--ion-color-light);
+	text-shadow: black 2px 2px 5px; 
+}
+
+/**** BACKGROUNDS *****/
+
+.wood-background {
+	background-image: url('../../../assets/frame2.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+	color: var(--ion-color-light);
+}
+
+.brick-background {
+	background-image: url('../../../assets/background/gray-brick.jpg');
+  background-repeat: repeat;
+  background-position: center;
+	color: var(--ion-color-light);
+  border: 5px solid rgba(var(--ion-color-light-rgb), 0.3);
+  border-radius: 10px;
+}
+
+.white-background {
+	background-color: rgba(var(--ion-color-light-rgb), 0.5);
+  border: 1px solid rgba(var(--ion-color-light-rgb), 0.5);
+  border-radius: 10px;
+}
+
+.no-background {
+  background: none;
+}

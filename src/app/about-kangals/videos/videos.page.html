@@ -1,0 +1,188 @@
+<ion-content [fullscreen]="true">
+  <ion-grid class="ion-no-padding">
+    <ion-row  class="ion-no-padding ion-no-margin">
+      <ion-col size="12" class="ion-no-padding ion-no-margin">
+        <ion-toolbar>
+          <ion-buttons slot="end" class="ion-padding-end">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+        </ion-toolbar>
+        <div class="home-logo">
+          <img class="ion-padding" (click)="goHome()"
+            src="../../assets/logos/FKlogo-full-350px.png"> 
+        </div>
+        <div class="videos-title">
+          <h1 #photosTitle><span class="title-cap">V</span>ideos</h1>
+        </div>
+        <img src="../../../assets/background/sunset.jpg">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="white-background ion-text-center">
+        <p class="videos-subtitle">Swipe to see all videos in each album.</p>
+      </ion-col>
+    </ion-row>
+    <!-- Start Row of Video Albums -->
+    <ion-row class="ion-align-items-center"> 
+      <!-- Cujo Videos -->
+      <ion-col size="12" class="ion-padding">
+        <ion-row class="ion-no-padding">
+          <ion-col size="12" class="ion-text-center white-background">
+            <h2>Cujo</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row (mouseover)="showCujoNav = true" (mouseleave)="showCujoNav = false"
+        (touchstart)="showCujoNav = true" class="brick-background">
+          <ion-col size="2" class="ion-align-self-center ion-text-center">
+            <div *ngIf="showCujoNav" (click)="toPrevSlide(cujoSlider)" 
+            (touchstart)="toPrevSlide(cujoSlider)" (touchend)="showCujoNav = true">
+              <ion-icon size="large" slot="icon-only" name="arrow-back-circle-outline"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col size="8">
+            <ion-slides [options]="sliderOpts" scrollbar="true" #cujoVids>
+              <!-- <img style="height: 40vh;" src="{{ cujo.url }}" tappable (click)="openPreview(cujo)">
+              <p class="image-title">
+                {{ cujo.title }}
+              </p> -->  
+              <ion-slide class="ion-align-self-center" >
+                <ion-card>
+                  <div class="vimeo-container" #cujoVideo01></div>
+                  <ion-card-header>
+                    <ion-card-subtitle>April 2021 on the Farm</ion-card-subtitle>
+                    <ion-card-title>Cujo and Kevi</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <p><b>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</b></p>
+                    <p><b>Quia omnis repellendus, rem veniam quod tenetur sint? </b></p>
+                  </ion-card-content>
+                </ion-card>
+              </ion-slide>
+              <ion-slide class="ion-align-self-center" >
+                <ion-card>
+                  <div class="vimeo-container" #cujoVideo02></div>
+                  <ion-card-header>
+                    <ion-card-subtitle>April 2021 on the Farm</ion-card-subtitle>
+                    <ion-card-title>Cujo and Kevi</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <p><b>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</b></p>
+                    <p><b>Quia omnis repellendus, rem veniam quod tenetur sint? </b></p>
+                  </ion-card-content>
+                </ion-card>
+              </ion-slide>
+            </ion-slides>
+          </ion-col>
+          <ion-col size="2" class="ion-align-self-center ion-text-center">
+            <div *ngIf="showCujoNav" (click)="toNextSlide(cujoSlider)" 
+            (touchstart)="toNextSlide(cujoSlider)" (touchend)="showCujoNav = true">
+              <ion-icon size="large" slot="icon-only" name="arrow-forward-circle-outline"></ion-icon>
+            </div>
+          </ion-col>
+        </ion-row> 
+      </ion-col>
+      <!-- LitterA Videos -->
+      <ion-col size="12" class="ion-padding">
+        <ion-row class="ion-no-padding">
+          <ion-col size="12" class="ion-text-center white-background">
+            <h2>Litter A</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row (mouseover)="showLitterANav = true" (mouseleave)="showLitterANav = false"
+        (touchstart)="showLitterANav = true" class="brick-background">
+          <ion-col size="2" class="ion-align-self-center ion-text-center">
+            <div *ngIf="showLitterANav" (click)="toPrevSlide(litterASlider)" 
+            (touchstart)="toPrevSlide(litterASlider)" (touchend)="showCujoNav = true">
+              <ion-icon size="large" slot="icon-only" name="arrow-back-circle-outline"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col size="8">
+            <ion-slides [options]="sliderOpts" scrollbar="true" #litterAVids>
+              <ion-slide class="ion-align-self-center" >
+                <ion-card>
+                  <div class="vimeo-container" #litterAVideo01></div>
+                  <ion-card-header>
+                    <ion-card-subtitle>June 2021 on the Farm</ion-card-subtitle>
+                    <ion-card-title>Litter A - First Check-in</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <p><b>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</b></p>
+                    <p><b>Quia omnis repellendus, rem veniam quod tenetur sint? </b></p>
+                  </ion-card-content>
+                </ion-card>
+              </ion-slide>
+              <ion-slide class="ion-align-self-center" >
+                <ion-card>
+                  <div class="vimeo-container" #litterAVideo02></div>
+                  <ion-card-header>
+                    <ion-card-subtitle>June 2021 on the Farm</ion-card-subtitle>
+                    <ion-card-title>Litter A - 2nd Check-in</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <p><b>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</b></p>
+                    <p><b>Quia omnis repellendus, rem veniam quod tenetur sint? </b></p>
+                  </ion-card-content>
+                </ion-card>
+              </ion-slide>
+
+              <ion-slide class="ion-align-self-center" >
+                <ion-card>
+                  <div class="vimeo-container" #litterAVideo03></div>
+                  <ion-card-header>
+                    <ion-card-subtitle>June 2021 on the Farm</ion-card-subtitle>
+                    <ion-card-title>Litter A - 3rd Check-in</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <p><b>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</b></p>
+                    <p><b>Quia omnis repellendus, rem veniam quod tenetur sint? </b></p>
+                  </ion-card-content>
+                </ion-card>
+              </ion-slide>
+
+              <ion-slide class="ion-align-self-center" >
+                <ion-card>
+                  <div class="vimeo-container" #litterAVideo04></div>
+                  <ion-card-header>
+                    <ion-card-subtitle>June 2021 on the Farm</ion-card-subtitle>
+                    <ion-card-title>Litter A - Cooling Off or Playing</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <p><b>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</b></p>
+                    <p><b>Quia omnis repellendus, rem veniam quod tenetur sint? </b></p>
+                  </ion-card-content>
+                </ion-card>
+              </ion-slide>
+
+              <ion-slide class="ion-align-self-center" >
+                <ion-card>
+                  <div class="vimeo-container" #litterAVideo05></div>
+                  <ion-card-header>
+                    <ion-card-subtitle>June 2021 on the Farm</ion-card-subtitle>
+                    <ion-card-title>Litter A - The Lumpkins Have Grown</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <p><b>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</b></p>
+                    <p><b>Quia omnis repellendus, rem veniam quod tenetur sint? </b></p>
+                  </ion-card-content>
+                </ion-card>
+              </ion-slide>
+
+            </ion-slides>
+          </ion-col>
+          <ion-col size="2" class="ion-align-self-center ion-text-center">
+            <div *ngIf="showLitterANav" (click)="toNextSlide(litterASlider)" 
+            (touchstart)="toNextSlide(litterASlider)" (touchend)="showLitterANav = true">
+              <ion-icon size="large" slot="icon-only" name="arrow-forward-circle-outline"></ion-icon>
+            </div>
+          </ion-col>
+        </ion-row> 
+      </ion-col>
+    </ion-row>
+    <!-- End Row of Picture Albums -->
+  </ion-grid>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="goToAboutKangals()" color="primary">
+      <ion-icon name="arrow-back-circle" color="light"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

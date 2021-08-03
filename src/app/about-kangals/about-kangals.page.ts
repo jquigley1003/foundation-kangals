@@ -48,6 +48,10 @@ export class AboutKangalsPage implements OnInit, AfterViewInit {
     this.router.navigate(['about-kangals/photos']);
   }
 
+  goToVideos() {
+    this.router.navigate(['about-kangals/videos']);
+  }
+
   async testClick() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',

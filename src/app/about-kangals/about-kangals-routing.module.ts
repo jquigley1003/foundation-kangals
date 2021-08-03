@@ -19,6 +19,10 @@ const routes: Routes = [
   {
     path: 'requirement-to-own',
     loadChildren: () => import('./requirement-to-own/requirement-to-own.module').then( m => m.RequirementToOwnPageModule)
+  },
+  {
+    path: 'videos',
+    loadChildren: () => import('./videos/videos.module').then( m => m.VideosPageModule)
   }
 ];
 
