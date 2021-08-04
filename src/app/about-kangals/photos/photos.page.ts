@@ -50,22 +50,22 @@ export class PhotosPage implements OnInit, AfterViewInit {
     {
       id: 1,
       url: '../../../assets/kevi/Kevi-1.jpg',
-      title: 'Kevi relaxing'
+      title: 'Astra relaxing'
     },
     {
       id: 2,
       url: '../../../assets/kevi/Kevi-2.jpg',
-      title: 'Kevi enjoying some love'
+      title: 'Astra enjoying some love'
     },
     {
       id: 3,
       url: '../../../assets/kevi/Kevi-3.jpg',
-      title: 'Kevi and her friend'
+      title: 'Astra and Kevi'
     },
     {
       id: 4,
       url: '../../../assets/kevi/Kevi-4.jpg',
-      title: 'Kevi walking with Marisa'
+      title: 'Cujo walking with Marisa'
     }
   ];
 

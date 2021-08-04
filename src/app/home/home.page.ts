@@ -17,6 +17,8 @@ export class HomePage implements OnInit, AfterViewInit {
   @ViewChild('mySlideImg2') mySlideImg2: ElementRef;
   @ViewChild('mySlideImg3') mySlideImg3: ElementRef;
   @ViewChild('mySlideImg4') mySlideImg4: ElementRef;
+  @ViewChild('mySlideImg5') mySlideImg5: ElementRef;
+  @ViewChild('mySlideImg6') mySlideImg6: ElementRef;
   @ViewChild('aboutKangals') myAboutKangals: ElementRef;
   @ViewChild('purchaseKangals') myPurchaseKangals: ElementRef;
 
