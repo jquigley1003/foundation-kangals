@@ -27,14 +27,14 @@
     <!-- Start Row of Picture Albums -->
     <ion-row class="ion-align-items-center"> 
       <!-- Cujo Pics -->
-      <ion-col sizeXs="12" sizeLg="6" sizeXl="4" class="ion-padding">
+      <ion-col size-xs="12" size-md="6" class="ion-padding">
         <ion-row class="ion-no-padding">
           <ion-col size="12" class="ion-text-center white-background">
             <h2>Cujo</h2>
           </ion-col>
         </ion-row>
         <ion-row (mouseover)="showCujoNav = true" (mouseleave)="showCujoNav = false"
-        (touchstart)="showCujoNav = true" class="brick-background">
+        (touchstart)="showCujoNav = true" class="gold-background">
           <ion-col size="2" class="ion-align-self-center ion-text-center">
             <div *ngIf="showCujoNav" (click)="toPrevSlide(cujoSlider)" 
             (touchstart)="toPrevSlide(cujoSlider)" (touchend)="showCujoNav = true">
@@ -60,14 +60,14 @@
         </ion-row> 
       </ion-col>
       <!-- Kevi Pics -->
-      <ion-col sizeXs="12" sizeLg="6" sizeXl="4" class="ion-padding">
+      <ion-col size-xs="12" size-md="6" class="ion-padding">
         <ion-row>
           <ion-col size="12" class="ion-text-center white-background">
-            <h2>Astra</h2>
+            <h2>Kevi</h2>
           </ion-col>
         </ion-row>
         <ion-row (mouseover)="showKeviNav = true" (mouseleave)="showKeviNav = false"
-        (touchstart)="showKeviNav = true" class="brick-background">
+        (touchstart)="showKeviNav = true" class="gold-background">
           <ion-col size="2" class="ion-align-self-center ion-text-center">
             <div *ngIf="showKeviNav" (click)="toPrevSlide(keviSlider)" 
             (touchstart)="toPrevSlide(keviSlider)" (touchend)="showKeviNav = true">
@@ -92,15 +92,48 @@
           </ion-col>
         </ion-row>
       </ion-col>
+      <!-- Astra Pics -->
+      <ion-col size-xs="12" size-md="6" class="ion-padding">
+        <ion-row>
+          <ion-col size="12" class="ion-text-center white-background">
+            <h2>Astra</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row (mouseover)="showAstraNav = true" (mouseleave)="showAstraNav = false"
+        (touchstart)="showAstraNav = true" class="gold-background">
+          <ion-col size="2" class="ion-align-self-center ion-text-center">
+            <div *ngIf="showAstraNav" (click)="toPrevSlide(astraSlider)" 
+            (touchstart)="toPrevSlide(astraSlider)" (touchend)="showAstraNav = true">
+              <ion-icon size="large" slot="icon-only" name="arrow-back-circle-outline"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col size="8">
+            <ion-slides [options]="sliderOpts" scrollbar="true" #astraPics>
+              <ion-slide *ngFor="let astra of astraImgs" class="ion-align-self-center" style="display:block;">
+                <img style="height: 40vh;" src="{{ astra.url }}" tappable (click)="openPreview(astra)">
+                <p class="image-title">
+                  {{ astra.title }}
+                </p>
+              </ion-slide>
+            </ion-slides>
+          </ion-col>
+          <ion-col size="2" class="ion-align-self-center ion-text-center">
+            <div *ngIf="showAstraNav" (click)="toNextSlide(astraSlider)" 
+            (touchstart)="toNextSlide(astraSlider)" (touchend)="showAstraNav = true">
+              <ion-icon size="large" slot="icon-only" name="arrow-forward-circle-outline"></ion-icon>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
       <!-- LitterA Pics -->
-      <ion-col sizeXs="12" sizeLg="6" sizeXl="4" class="ion-padding">
+      <ion-col size-xs="12" size-md="6" class="ion-padding">
         <ion-row class="ion-no-padding">
           <ion-col size="12" class="ion-text-center white-background">
             <h2>Litter A</h2>
           </ion-col>
         </ion-row>
         <ion-row (mouseover)="showLitterANav = true" (mouseleave)="showLitterANav = false"
-        (touchstart)="showLitterANav = true" class="brick-background">
+        (touchstart)="showLitterANav = true" class="gold-background">
           <ion-col size="2" class="ion-align-self-center ion-text-center">
             <div *ngIf="showLitterANav" (click)="toPrevSlide(litterASlider)" 
             (touchstart)="toPrevSlide(litterASlider)" (touchend)="showLitterANav = true">
