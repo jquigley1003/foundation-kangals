@@ -1,13 +1,16 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { IonMenu, ModalController } from '@ionic/angular';
+
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { RegisterModalComponent } from './shared/auth/register-modal/register-modal.component';
 import { SignInModalComponent } from './shared/auth/sign-in-modal/sign-in-modal.component';
-import { AuthService } from './shared/auth/auth.service';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable, Subject } from 'rxjs';
 import { User } from './shared/models/user.model';
-import { takeUntil } from 'rxjs/operators';
+import { AuthService } from './shared/auth/auth.service';
+import { ToastService } from './shared/notify/toast.service';
 
 @Component({
   selector: 'app-root',
@@ -17,9 +20,8 @@ import { takeUntil } from 'rxjs/operators';
 export class AppComponent implements AfterViewInit, OnDestroy {
   @ViewChild(IonMenu) ionMenu: IonMenu;
   currentUser = null;
-  currentUser2 = null;
+  userFullName = null;
   currentUser$: Observable<User>;
-  userPromise: Promise<User>;
   ngUnsubscribe = new Subject<void>();
 
   public appPages = [
@@ -42,18 +44,13 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   constructor(
     private modalCtrl: ModalController,
     private authService: AuthService,
-    private afAuth: AngularFireAuth
+    private toastService: ToastService,
+    private router: Router
   ) {
-    // this.afAuth.onAuthStateChanged(user => {
-    //   console.log('app component constructor afAuth current user: ',user);
-    //   this.currentUser = user;
-    // });
     this.getCurrentUser();
   }
 
-  ngAfterViewInit() {
-    // this.getCurrentUser();
-  }
+  ngAfterViewInit() {}
 
   getCurrentUser() {
     this.currentUser$ = this.authService.user$;
@@ -61,18 +58,13 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(data => {
       if(data) {
-        this.currentUser2 = data.firstName + ' ' + data.lastName;
+        this.userFullName = data.firstName + ' ' + data.lastName;
       } else {
-        this.currentUser2 = null;
+        this.userFullName = null;
       }
-      console.log('app component getCurrentUser = ', this.currentUser2);
+      console.log('app component getCurrentUser = ', this.userFullName);
     });
   }
-
-  // getCurrentUser() {
-  //   this.currentUser = this.authService.currentUser;
-  //   console.log('app component getCurrentUser result: ', this.currentUser);
-  // }
 
   closeMenu() {
     this.ionMenu.close();
@@ -92,6 +84,26 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       componentProps: {}
     });
     return await modal.present();
+  }
+
+  async signOut() {
+    await this.authService.signOut()
+    .then(async () => {
+      await this.toastService.presentToast(
+        'You Have Signed Out.',
+        'middle',
+        [{
+          text: 'OK',
+          role: 'cancel',
+          handler: () => {
+            console.log('dismiss toast message');
+            this.router.navigate(['/home']);
+          }
+        }],
+        3000
+      );
+      this.router.navigate(['/home']);
+    });
   }
 
   ngOnDestroy() {

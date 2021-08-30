@@ -5,7 +5,7 @@
           <ion-list-header>Menu</ion-list-header>
           <ion-note>
             <!-- <span>{{ (currentUser$ | async).firstName }},<br></span> -->
-            <span *ngIf="currentUser2">{{ currentUser2 }},<br></span>
+            <span *ngIf="userFullName">{{ userFullName }},<br></span>
           Welcome to Foundation Kangals!</ion-note>
           <!-- <ion-button (click)="getCurrentUser()">Get Current User</ion-button> -->
 
@@ -32,15 +32,20 @@
         <ion-list id="inbox-list">
           <ion-list-header>Access</ion-list-header>
           <ion-menu-toggle>
-            <ion-item (click)="presentRegisterModal()" 
+            <ion-item *ngIf="!userFullName" 
             lines="none" detail="false">
               <ion-icon slot="start" name="person-add-outline"></ion-icon>
-              <ion-label>Register</ion-label>
+              <ion-button (click)="presentRegisterModal()">Register</ion-button>
             </ion-item>
-            <ion-item (click)="presentSignInModal()" 
+            <ion-item *ngIf="!userFullName"
             lines="none" detail="false">
               <ion-icon slot="start" name="log-in-outline"></ion-icon>
-              <ion-label>Sign In</ion-label>
+              <ion-button (click)="presentSignInModal()">Sign In</ion-button>
+            </ion-item>
+            <ion-item *ngIf="userFullName"
+            lines="none" detail="false">
+              <ion-icon slot="start" name="log-out-outline"></ion-icon>
+              <ion-button (click)="signOut()">Sign Out</ion-button>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
