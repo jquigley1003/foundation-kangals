@@ -1,0 +1,36 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h2 class="ion-text-center">Sign In to Foundation Kangals</h2>
+
+        <form [formGroup]="signInForm" (ngSubmit)="onSignInForm()" (keyup.enter)="onSignInForm()">
+            
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" formControlName="email" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input [type]="passwordType" formControlName="password" required></ion-input>
+            <ion-icon name="eye" [color]="passwordShow === true ? 'secondary' : 'primary'"
+              slot="end" (click)="togglePassword()"></ion-icon>
+          </ion-item>
+
+          <ion-row>
+            <ion-col class="ion-text-end">
+              <ion-button fill="clear" (click)="closeModal()">Cancel</ion-button>
+              <ion-button type="submit" [disabled]="!signInForm.valid">Submit</ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-button fill="clear" (click)="onSignOut()">Sign Out</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

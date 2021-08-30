@@ -1,0 +1,11 @@
+<ion-content>
+  <ion-grid>
+    <ion-col>
+      <ion-button (click)="takePicture()" expand="block">
+        <ion-icon name="camera" slot="start"></ion-icon>
+        Capture image
+      </ion-button>
+      <ion-img *ngIf="myImage" [src]="myImage"></ion-img>
+    </ion-col>
+  </ion-grid>
+</ion-content>

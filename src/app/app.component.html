@@ -3,7 +3,11 @@
       <ion-content>
         <ion-list id="inbox-list">
           <ion-list-header>Menu</ion-list-header>
-          <ion-note>Welcome to Foundation Kangals!</ion-note>
+          <ion-note>
+            <!-- <span>{{ (currentUser$ | async).firstName }},<br></span> -->
+            <span *ngIf="currentUser2">{{ currentUser2 }},<br></span>
+          Welcome to Foundation Kangals!</ion-note>
+          <!-- <ion-button (click)="getCurrentUser()">Get Current User</ion-button> -->
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
@@ -24,6 +28,21 @@
             <ion-icon slot="start" name="logo-facebook"></ion-icon>
             <ion-label>Facebook</ion-label>
           </ion-item>
+        </ion-list>
+        <ion-list id="inbox-list">
+          <ion-list-header>Access</ion-list-header>
+          <ion-menu-toggle>
+            <ion-item (click)="presentRegisterModal()" 
+            lines="none" detail="false">
+              <ion-icon slot="start" name="person-add-outline"></ion-icon>
+              <ion-label>Register</ion-label>
+            </ion-item>
+            <ion-item (click)="presentSignInModal()" 
+            lines="none" detail="false">
+              <ion-icon slot="start" name="log-in-outline"></ion-icon>
+              <ion-label>Sign In</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
         </ion-list>
       </ion-content>
     </ion-menu>

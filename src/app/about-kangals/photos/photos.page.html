@@ -160,6 +160,16 @@
       </ion-col>
     </ion-row>
     <!-- End Row of Picture Albums -->
+    <!--- Begin: Admin Only - Add more pictures -->
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="openGetPhotoModal()" expand="block">
+          <ion-icon name="camera" slot="start"></ion-icon>
+          Add a new photo
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <!--- End: Admin Only - Add more pictures -->
   </ion-grid>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="goToAboutKangals()" color="primary">

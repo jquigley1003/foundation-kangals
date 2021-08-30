@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { RequirementToOwnPageRoutingModule } from './requirement-to-own-routing.module';
 
 import { RequirementToOwnPage } from './requirement-to-own.page';
-import { FooterModule } from 'src/app/shared/components/footer/footer.module';
+import { FooterModule } from 'src/app/shared/footer/footer.module';
 
 @NgModule({
   imports: [

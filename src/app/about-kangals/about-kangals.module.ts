@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AboutKangalsPageRoutingModule } from './about-kangals-routing.module';
 
 import { AboutKangalsPage } from './about-kangals.page';
-import { FooterModule } from '../shared/components/footer/footer.module';
+import { FooterModule } from '../shared/footer/footer.module';
 
 @NgModule({
   imports: [

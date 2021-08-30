@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { BreedPageRoutingModule } from './breed-routing.module';
 
 import { BreedPage } from './breed.page';
-import { FooterModule } from 'src/app/shared/components/footer/footer.module';
+import { FooterModule } from 'src/app/shared/footer/footer.module';
 
 @NgModule({
   imports: [

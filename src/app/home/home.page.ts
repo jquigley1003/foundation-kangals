@@ -1,7 +1,7 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimationController, Animation, IonSlides } from '@ionic/angular';
-import { DetectMobileService } from '../shared/services/detect-mobile.service';
+import { DetectMobileService } from '../shared/detect/detect-mobile.service';
 
 
 

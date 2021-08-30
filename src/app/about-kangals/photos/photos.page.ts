@@ -2,8 +2,9 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { Router } from '@angular/router';
 
 import { AnimationController, Animation, ModalController, IonSlides, NavController } from '@ionic/angular';
+import { GetPhotoModalComponent } from 'src/app/shared/photo/get-photo-modal/get-photo-modal.component';
 
-import { PhotoModalComponent } from 'src/app/shared/modals/photo-modal/photo-modal.component';
+import { PhotoModalComponent } from 'src/app/shared/photo/photo-modal/photo-modal.component';
 
 @Component({
   selector: 'app-photos',
@@ -515,6 +516,18 @@ export class PhotosPage implements OnInit, AfterViewInit {
 
   hideSlideButtons(nav) {
     nav = false;
+  }
+
+  // Add more pictures - admin only
+  openGetPhotoModal() {
+    this.modalController.create({
+      cssClass: 'fullscreen',
+      swipeToClose: true,
+      component: GetPhotoModalComponent,
+      componentProps: {}
+    }).then(modal => {
+      modal.present();
+    });
   }
 
   goHome() {
