@@ -8,6 +8,9 @@ import { PhotosPageRoutingModule } from './photos-routing.module';
 
 import { PhotosPage } from './photos.page';
 import { FooterModule } from 'src/app/shared/footer/footer.module';
+import { PhotoModalModule } from 'src/app/shared/photo/photo-modal/photo-modal.module';
+import { AlbumModalModule } from 'src/app/shared/photo/album-modal/album-modal.module';
+import { UploadPhotoModalModule } from 'src/app/shared/photo/upload-photo-modal/upload-photo-modal.module';
 
 @NgModule({
   imports: [
@@ -15,7 +18,10 @@ import { FooterModule } from 'src/app/shared/footer/footer.module';
     FormsModule,
     IonicModule,
     PhotosPageRoutingModule,
-    FooterModule
+    FooterModule,
+    PhotoModalModule,
+    AlbumModalModule,
+    UploadPhotoModalModule
   ],
   declarations: [PhotosPage]
 })

@@ -21,6 +21,7 @@
     </ion-row>
     <ion-row>
       <ion-col class="white-background ion-text-center ion-margin">
+        <p *ngIf="currentUser">{{currentUser.displayName}}</p>
         <p class="photos-subtitle">Swipe to see all pictures in each album. Tap on a picture to zoom in.</p>
       </ion-col>
     </ion-row>
@@ -126,7 +127,7 @@
         </ion-row>
       </ion-col>
       <!-- LitterA Pics -->
-      <ion-col size-xs="12" size-md="6" class="ion-padding">
+      <!-- <ion-col size-xs="12" size-md="6" class="ion-padding">
         <ion-row class="ion-no-padding">
           <ion-col size="12" class="ion-text-center white-background">
             <h2>Litter A</h2>
@@ -157,16 +158,66 @@
             </div>
           </ion-col>
         </ion-row>
-      </ion-col>
+      </ion-col> -->
     </ion-row>
     <!-- End Row of Picture Albums -->
+    <!-- Testing the new album look -->
+    <ion-row>
+      <ion-col size-xs="12" size-md="8" offset-md="2" class="ion-padding">
+        <ion-row class="ion-no-padding">
+          <ion-col size="12" class="ion-text-center white-background">
+            <h2>{{ currentAlbum }}</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row (mouseover)="showLitterANav = true" (mouseleave)="showLitterANav = false"
+          (touchstart)="showLitterANav = true" class="gold-background">
+          <ion-col size="2" class="ion-align-self-center ion-text-center">
+            <div *ngIf="showLitterANav" (click)="toPrevSlide(litterASlider)" 
+            (touchstart)="toPrevSlide(litterASlider)" (touchend)="showLitterANav = true">
+              <ion-icon size="large" slot="icon-only" name="arrow-back-circle-outline"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col size="8">
+            <ion-slides [options]="sliderOpts" scrollbar="true" #litterAPics>
+              <ion-slide *ngFor="let photo of photos" class="ion-align-self-center" style="display:block;">
+                  <img style="height: 40vh;" src="{{ photo.imageUrl }}" tappable (click)="openPreview(photo)">
+                  <p class="image-title">
+                    {{ photo.title }}
+                  </p>
+              </ion-slide>
+            </ion-slides>
+          </ion-col>
+          <ion-col size="2" class="ion-align-self-center ion-text-center">
+            <div *ngIf="showLitterANav" (click)="toNextSlide(litterASlider)" 
+            (touchstart)="toNextSlide(litterASlider)" (touchend)="showLitterANav = true">
+              <ion-icon size="large" slot="icon-only" name="arrow-forward-circle-outline"></ion-icon>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row>
+      <ion-col>
+        <div style="text-align: center;">
+          <ion-button *ngFor="let album of albums" (click)="chooseAlbum(album.title)">
+            {{ album.title }}</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
     <!--- Begin: Admin Only - Add more pictures -->
     <ion-row>
       <ion-col>
-        <ion-button (click)="openGetPhotoModal()" expand="block">
+
+        <ion-button (click)="openAlbumModal()" expand="block">
+          <ion-icon name="folder" slot="start"></ion-icon>
+          Create a new album
+        </ion-button>
+        <ion-button (click)="openUploadPhotoModal()" expand="block">
           <ion-icon name="camera" slot="start"></ion-icon>
           Add a new photo
         </ion-button>
+
       </ion-col>
     </ion-row>
     <!--- End: Admin Only - Add more pictures -->

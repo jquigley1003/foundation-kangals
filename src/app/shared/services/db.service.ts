@@ -37,13 +37,6 @@ export class DbService {
       );
   }
 
-
-  /**
-   * @param path 'collection' or 'collection/docID'
-   * @param data new data
-   *
-   * Creates or updates data on a collection or document
-   **/
   updateAt(path: string, data: Record<string, unknown>): Promise<any> {
     const segments = path.split('/').filter(v => v);
     if (segments.length % 2) {
@@ -54,11 +47,6 @@ export class DbService {
     }
   }
 
-  /**
-   * @param path path to document
-   *
-   * Deletes document from Firestore
-   **/
   delete(path) {
     return this.afs.doc(path).delete();
   }

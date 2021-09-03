@@ -1,28 +1,39 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AnimationController, Animation, ModalController, IonSlides, NavController } from '@ionic/angular';
-import { GetPhotoModalComponent } from 'src/app/shared/photo/get-photo-modal/get-photo-modal.component';
 
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+import { Album } from 'src/app/shared/models/album.model';
 import { PhotoModalComponent } from 'src/app/shared/photo/photo-modal/photo-modal.component';
+import { AlbumModalComponent } from 'src/app/shared/photo/album-modal/album-modal.component';
+import { UploadPhotoModalComponent } from 'src/app/shared/photo/upload-photo-modal/upload-photo-modal.component';
+import { PhotoService } from 'src/app/shared/photo/photo.service';
+import { AuthService } from 'src/app/shared/auth/auth.service';
+import { Photo } from 'src/app/shared/models/photo.model';
 
 @Component({
   selector: 'app-photos',
   templateUrl: './photos.page.html',
   styleUrls: ['./photos.page.scss'],
 })
-export class PhotosPage implements OnInit, AfterViewInit {
+export class PhotosPage implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('photosTitle') photosTitle: ElementRef;
   @ViewChild('cujoPics') cujoSlider: IonSlides;
   @ViewChild('keviPics') keviSlider: IonSlides;
   @ViewChild('astraPics') astraSlider: IonSlides;
   @ViewChild('litterAPics') litterASlider: IonSlides;
 
+  currentAlbum = 'All Photos';
+
   showCujoNav = false;
   showKeviNav = false;
   showAstraNav = false;
   showLitterANav = false;
   photosTitleAnim: Animation;
+  currentUser = null;
 
   sliderOpts = {
     zoom: false,
@@ -30,6 +41,12 @@ export class PhotosPage implements OnInit, AfterViewInit {
     centeredSlides: true,
     spaceBetween: 20
   };
+
+  albums$: Observable<any>;
+  albums: Array<any> = [];
+  photos$: Observable<any>;
+  photos: Array<any> = [];
+  ngUnsubscribe = new Subject<void>();
 
   cujoImgs = [
     {
@@ -472,10 +489,14 @@ export class PhotosPage implements OnInit, AfterViewInit {
     private animationCtrl: AnimationController,
     private router: Router,
     private navCtrl: NavController,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private authService: AuthService,
+    private photoService: PhotoService
   ) { }
 
   ngOnInit() {
+    this.getAlbums();
+    this.getPhotos();
   }
 
   ngAfterViewInit() {
@@ -487,6 +508,31 @@ export class PhotosPage implements OnInit, AfterViewInit {
       .fromTo('opacity', '0', '1');
 
     this.photosTitleAnim.play();
+
+    this.currentUser = this.authService.currentUser;
+    console.log('photo page currentUser: ', this.currentUser);
+  }
+
+  getAlbums() {
+    this.albums$ = this.photoService.albums$;
+    this.albums$
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(data => {
+        this.albums = data;
+      });
+  }
+
+  getPhotos() {
+    this.photos$ = this.photoService.photos$;
+    this.photos$
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(data => {
+        this.photos = data;
+      });
+  }
+
+  chooseAlbum(title) {
+    this.currentAlbum = title;
   }
 
   openPreview(image) {
@@ -518,18 +564,6 @@ export class PhotosPage implements OnInit, AfterViewInit {
     nav = false;
   }
 
-  // Add more pictures - admin only
-  openGetPhotoModal() {
-    this.modalController.create({
-      cssClass: 'fullscreen',
-      swipeToClose: true,
-      component: GetPhotoModalComponent,
-      componentProps: {}
-    }).then(modal => {
-      modal.present();
-    });
-  }
-
   goHome() {
     this.router.navigate(['/home']);
   }
@@ -537,5 +571,35 @@ export class PhotosPage implements OnInit, AfterViewInit {
   goToAboutKangals() {
     // this.router.navigate(['about-kangals']);
     this.navCtrl.navigateBack('about-kangals');
+  }
+
+  // Admin Only - Create new album or add more pictures
+  openAlbumModal() {
+    this.modalController.create({
+      swipeToClose: true,
+      component: AlbumModalComponent,
+      componentProps: {}
+    }).then(modal => {
+      modal.present();
+    });
+  }
+
+  openUploadPhotoModal() {
+    this.modalController.create({
+      cssClass: 'fullscreen',
+      swipeToClose: true,
+      component: UploadPhotoModalComponent,
+      componentProps: {
+        creatorId: this.currentUser.uid,
+        albums: this.albums
+      }
+    }).then(modal => {
+      modal.present();
+    });
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

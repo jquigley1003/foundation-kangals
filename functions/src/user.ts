@@ -58,7 +58,7 @@ export const setUserRoles = functions.auth.user().onCreate((user) => {
   return admin.auth().setCustomUserClaims(user.uid, {
     admin: false,
   }).then(() => {
-    console.log("User Role Admin set to false for ", user );
+    return console.log("User Role Admin set to false for ", user );
   });
 });
 

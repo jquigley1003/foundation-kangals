@@ -1,0 +1,36 @@
+<ion-content>
+  <ion-grid>
+    <ion-col size="12" class="ion-text-center">
+      <h1>1st - Enter a title below</h1>
+      <ion-item class="ion-text-center">
+        <ion-input [(ngModel)]="photo.title" placeholder="describe your photo..."></ion-input>
+      </ion-item>
+      <h1>2nd - Click buttons to choose a photo album</h1>
+      <ion-item class="ion-text-center">
+        <ion-input [(ngModel)]="chosenAlbum" placeholder="choose album..." readonly></ion-input>
+      </ion-item>
+      <div class="ion-text-center">
+        <ion-button *ngFor="let album of albums" (click)="pickAlbum(album)">
+          {{album.title}}
+        </ion-button>
+      </div>
+      
+    </ion-col>
+
+    <ion-col size="12" class="ion-text-center">
+      <h1>3rd - Take a picture</h1>
+      <ion-button (click)="takePicture()" expand="block">
+        <ion-icon name="camera" slot="start"></ion-icon>
+        Capture image
+      </ion-button>
+      <ion-img *ngIf="capturedImage" [src]="capturedImage"></ion-img>
+    </ion-col>
+  </ion-grid>
+  <div style="text-align: center;">
+    <ion-button color="success" (click)="uploadPhoto()" 
+    [disabled]="photo.title === '' || !capturedImage">
+      <ion-icon slot="start" name="checkmark"></ion-icon>
+      Upload New Photo
+    </ion-button>
+  </div>
+</ion-content>

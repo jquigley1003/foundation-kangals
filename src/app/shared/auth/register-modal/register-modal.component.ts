@@ -40,7 +40,6 @@ export class RegisterModalComponent implements OnInit {
     const lastName = this.registerForm.value.lastName.trim();
     const email = this.registerForm.value.email.trim();
     const password = this.registerForm.value.password.trim();
-
     const data = {
       email,
       password,
@@ -48,8 +47,9 @@ export class RegisterModalComponent implements OnInit {
       lastName
     };
 
-    const loading = await this.loadingService.presentLoading(
+    await this.loadingService.presentLoading(
       'Registering in process...', 'bubbles', 15000);
+
     this.authService.register(data)
     .then(async () => {
       this.loadingService.dismissLoading();

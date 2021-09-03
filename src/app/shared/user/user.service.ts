@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
 
 import { User } from '../models/user.model';
 
@@ -11,9 +9,7 @@ import { User } from '../models/user.model';
 export class UserService {
 
   constructor(
-    private afStore: AngularFirestore,
-    private afStorage: AngularFireStorage,
-    private afAuth: AngularFireAuth
+    private afStore: AngularFirestore
   ) {}
 
   createUserData(uid: string, email: string, firstName: string, lastName: string) {
@@ -36,5 +32,6 @@ export class UserService {
       }
     };
     return this.afStore.doc(`users/${uid}`).set(data);
+    // cloud function will automatically set the custom user claims (admin: false);
   }
 }

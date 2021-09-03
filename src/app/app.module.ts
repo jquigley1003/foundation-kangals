@@ -11,7 +11,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
-import { PhotoModalModule } from './shared/photo/photo-modal/photo-modal.module';
 import { RegisterModalModule } from './shared/auth/register-modal/register-modal.module';
 import { SignInModalModule } from './shared/auth/sign-in-modal/sign-in-modal.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -28,7 +27,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    PhotoModalModule,
     RegisterModalModule,
     SignInModalModule,
     ServiceWorkerModule.register('ngsw-worker.js', {

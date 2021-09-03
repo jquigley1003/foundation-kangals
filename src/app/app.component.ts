@@ -11,16 +11,17 @@ import { SignInModalComponent } from './shared/auth/sign-in-modal/sign-in-modal.
 import { User } from './shared/models/user.model';
 import { AuthService } from './shared/auth/auth.service';
 import { ToastService } from './shared/notify/toast.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent implements AfterViewInit, OnDestroy {
+export class AppComponent implements AfterViewInit {
   @ViewChild(IonMenu) ionMenu: IonMenu;
   currentUser = null;
-  userFullName = null;
+  // userFullName = null;
   currentUser$: Observable<User>;
   ngUnsubscribe = new Subject<void>();
 
@@ -43,28 +44,32 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   ];
   constructor(
     private modalCtrl: ModalController,
+    private afAuth: AngularFireAuth,
     private authService: AuthService,
     private toastService: ToastService,
     private router: Router
   ) {
-    this.getCurrentUser();
+    // !! implement if need to replace afAuth code below > this.getCurrentUser();
+    this.afAuth.onAuthStateChanged(user => {
+      this.currentUser = user;
+    });
   }
 
   ngAfterViewInit() {}
 
-  getCurrentUser() {
-    this.currentUser$ = this.authService.user$;
-    this.currentUser$
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(data => {
-      if(data) {
-        this.userFullName = data.firstName + ' ' + data.lastName;
-      } else {
-        this.userFullName = null;
-      }
-      console.log('app component getCurrentUser = ', this.userFullName);
-    });
-  }
+  // getCurrentUser() {
+  //   this.currentUser$ = this.authService.user$;
+  //   this.currentUser$
+  //     .pipe(takeUntil(this.ngUnsubscribe))
+  //     .subscribe(data => {
+  //     if(data) {
+  //       this.userFullName = data.firstName + ' ' + data.lastName;
+  //     } else {
+  //       this.userFullName = null;
+  //     }
+  //     console.log('app component getCurrentUser = ', this.userFullName);
+  //   });
+  // }
 
   closeMenu() {
     this.ionMenu.close();
@@ -106,8 +111,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
-  }
+  // ngOnDestroy() {
+  //   this.ngUnsubscribe.next();
+  //   this.ngUnsubscribe.complete();
+  // }
 }

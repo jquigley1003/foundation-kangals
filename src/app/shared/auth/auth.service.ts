@@ -22,19 +22,20 @@ export class AuthService {
     private userService: UserService,
     private toastService: ToastService
   ) {
-    // this.afAuth.onAuthStateChanged(user => {
-    //   console.log('Auth Service current user: ',user);
-    //   this.currentUser = user;
-    // });
-    this.user$ = this.afAuth.authState.pipe(
-      switchMap(user => {
-        if (user) {
-          return this.afStore.doc<User>(`users/${user.uid}`).valueChanges();
-        } else {
-          return of (null);
-        }
-      })
-    );
+    this.afAuth.onAuthStateChanged(user => {
+      // console.log('Auth Service current user: ',user);
+      this.currentUser = user;
+    });
+    // !! implement the code below if you need all current user data (address, image, etc)
+    // this.user$ = this.afAuth.authState.pipe(
+    //   switchMap(user => {
+    //     if (user) {
+    //       return this.afStore.doc<User>(`users/${user.uid}`).valueChanges();
+    //     } else {
+    //       return of (null);
+    //     }
+    //   })
+    // );
    }
 
   async register(newUser) {
