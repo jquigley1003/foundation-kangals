@@ -13,6 +13,8 @@ import { UploadPhotoModalComponent } from 'src/app/shared/photo/upload-photo-mod
 import { PhotoService } from 'src/app/shared/photo/photo.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 import { Photo } from 'src/app/shared/models/photo.model';
+import { AlertService } from 'src/app/shared/notify/alert.service';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-photos',
@@ -492,7 +494,8 @@ export class PhotosPage implements OnInit, AfterViewInit, OnDestroy {
     private navCtrl: NavController,
     private modalController: ModalController,
     private authService: AuthService,
-    private photoService: PhotoService
+    private photoService: PhotoService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -537,18 +540,28 @@ export class PhotosPage implements OnInit, AfterViewInit, OnDestroy {
     this.photos = this.allPhotos;
   }
 
-  chooseAlbum(album) {
+  async chooseAlbum(album) {
     this.currentAlbum = album.title;
     this.resetPhotos();
-    this.photos = this.photos.filter(pics => {
-      if(pics.albumId) {
-        if (pics.albumId.toLowerCase()
-          .indexOf(album.id.toLowerCase()) > -1) {
-          return true;
+    if(this.photos.some(obj => obj.albumId === album.id)) {
+      this.photos = this.photos.filter(pics => {
+        if(pics.albumId) {
+          if (pics.albumId.toLowerCase()
+            .indexOf(album.id.toLowerCase()) > -1) {
+            return true;
+          }
+          return false;
         }
-        return false;
-      }
-    });
+      });
+    } else {
+      this.showAllPhotos();
+      this.alertService.presentAlert(
+        'Sorry!',
+        'No pictures in this album',
+        'please try another album',
+        ['OK']
+      );
+    }
   }
 
   showAllPhotos() {
