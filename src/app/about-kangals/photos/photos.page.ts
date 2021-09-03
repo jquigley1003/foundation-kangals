@@ -45,6 +45,7 @@ export class PhotosPage implements OnInit, AfterViewInit, OnDestroy {
   albums$: Observable<any>;
   albums: Array<any> = [];
   photos$: Observable<any>;
+  allPhotos: Array<any> = [];
   photos: Array<any> = [];
   ngUnsubscribe = new Subject<void>();
 
@@ -527,12 +528,32 @@ export class PhotosPage implements OnInit, AfterViewInit, OnDestroy {
     this.photos$
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(data => {
+        this.allPhotos = data;
         this.photos = data;
       });
   }
 
-  chooseAlbum(title) {
-    this.currentAlbum = title;
+  resetPhotos() {
+    this.photos = this.allPhotos;
+  }
+
+  chooseAlbum(album) {
+    this.currentAlbum = album.title;
+    this.resetPhotos();
+    this.photos = this.photos.filter(pics => {
+      if(pics.albumId) {
+        if (pics.albumId.toLowerCase()
+          .indexOf(album.id.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      }
+    });
+  }
+
+  showAllPhotos() {
+    this.currentAlbum = 'All Photos';
+    this.resetPhotos();
   }
 
   openPreview(image) {

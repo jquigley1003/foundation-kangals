@@ -200,7 +200,8 @@
     <ion-row>
       <ion-col>
         <div style="text-align: center;">
-          <ion-button *ngFor="let album of albums" (click)="chooseAlbum(album.title)">
+          <ion-button (click)="showAllPhotos()">All Photos</ion-button>
+          <ion-button *ngFor="let album of albums" (click)="chooseAlbum(album)">
             {{ album.title }}</ion-button>
         </div>
       </ion-col>
