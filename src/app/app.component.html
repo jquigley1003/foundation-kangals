@@ -32,15 +32,15 @@
         <ion-list id="inbox-list">
           <ion-list-header>Access</ion-list-header>
           <ion-menu-toggle>
-            <ion-item *ngIf="!userFullName" lines="none" detail="false">
+            <!-- <ion-item *ngIf="!userFullName" lines="none" detail="false">
               <ion-icon slot="start" name="person-add-outline"></ion-icon>
               <ion-button (click)="presentRegisterModal()">Register</ion-button>
-            </ion-item>
-            <ion-item *ngIf="!userFullName" lines="none" detail="false">
+            </ion-item> -->
+            <ion-item *ngIf="!currentUser" lines="none" detail="false">
               <ion-icon slot="start" name="log-in-outline"></ion-icon>
               <ion-button (click)="presentSignInModal()">Sign In</ion-button>
             </ion-item>
-            <ion-item *ngIf="userFullName" lines="none" detail="false">
+            <ion-item *ngIf="currentUser" lines="none" detail="false">
               <ion-icon slot="start" name="log-out-outline"></ion-icon>
               <ion-button (click)="signOut()">Sign Out</ion-button>
             </ion-item>

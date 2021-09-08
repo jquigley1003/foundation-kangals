@@ -14,7 +14,6 @@ import { PhotoService } from 'src/app/shared/photo/photo.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 import { Photo } from 'src/app/shared/models/photo.model';
 import { AlertService } from 'src/app/shared/notify/alert.service';
-import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-photos',
@@ -496,11 +495,13 @@ export class PhotosPage implements OnInit, AfterViewInit, OnDestroy {
     private authService: AuthService,
     private photoService: PhotoService,
     private alertService: AlertService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.getAlbums();
     this.getPhotos();
+    this.currentUser = this.authService.currentUser;
   }
 
   ngAfterViewInit() {

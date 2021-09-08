@@ -207,7 +207,7 @@
       </ion-col>
     </ion-row>
     <!--- Begin: Admin Only - Add more pictures -->
-    <ion-row>
+    <ion-row *ngIf="currentUser && currentUser.email === 'jeff.quigley@wiifmconsulting.com'">
       <ion-col>
 
         <ion-button (click)="openAlbumModal()" expand="block">
