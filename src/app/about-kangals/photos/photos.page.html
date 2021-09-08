@@ -22,146 +22,11 @@
     <ion-row>
       <ion-col class="white-background ion-text-center ion-margin">
         <p *ngIf="currentUser">{{currentUser.displayName}}</p>
-        <p class="photos-subtitle">Swipe to see all pictures in each album. Tap on a picture to zoom in.</p>
+        <p class="photos-subtitle">View pictures by choosing an Album button below.<br>
+          Tap on a picture to zoom in.</p>
       </ion-col>
     </ion-row>
-    <!-- Start Row of Picture Albums -->
-    <ion-row class="ion-align-items-center"> 
-      <!-- Cujo Pics -->
-      <ion-col size-xs="12" size-md="6" class="ion-padding">
-        <ion-row class="ion-no-padding">
-          <ion-col size="12" class="ion-text-center white-background">
-            <h2>Cujo</h2>
-          </ion-col>
-        </ion-row>
-        <ion-row (mouseover)="showCujoNav = true" (mouseleave)="showCujoNav = false"
-        (touchstart)="showCujoNav = true" class="gold-background">
-          <ion-col size="2" class="ion-align-self-center ion-text-center">
-            <div *ngIf="showCujoNav" (click)="toPrevSlide(cujoSlider)" 
-            (touchstart)="toPrevSlide(cujoSlider)" (touchend)="showCujoNav = true">
-              <ion-icon size="large" slot="icon-only" name="arrow-back-circle-outline"></ion-icon>
-            </div>
-          </ion-col>
-          <ion-col size="8">
-            <ion-slides [options]="sliderOpts" scrollbar="true" #cujoPics>
-              <ion-slide *ngFor="let cujo of cujoImgs" class="ion-align-self-center" style="display:block;">
-                  <img style="height: 40vh;" src="{{ cujo.url }}" tappable (click)="openPreview(cujo)">
-                  <p class="image-title">
-                    {{ cujo.title }}
-                  </p>
-              </ion-slide>
-            </ion-slides>
-          </ion-col>
-          <ion-col size="2" class="ion-align-self-center ion-text-center">
-            <div *ngIf="showCujoNav" (click)="toNextSlide(cujoSlider)" 
-            (touchstart)="toNextSlide(cujoSlider)" (touchend)="showCujoNav = true">
-              <ion-icon size="large" slot="icon-only" name="arrow-forward-circle-outline"></ion-icon>
-            </div>
-          </ion-col>
-        </ion-row> 
-      </ion-col>
-      <!-- Kevi Pics -->
-      <ion-col size-xs="12" size-md="6" class="ion-padding">
-        <ion-row>
-          <ion-col size="12" class="ion-text-center white-background">
-            <h2>Kevi</h2>
-          </ion-col>
-        </ion-row>
-        <ion-row (mouseover)="showKeviNav = true" (mouseleave)="showKeviNav = false"
-        (touchstart)="showKeviNav = true" class="gold-background">
-          <ion-col size="2" class="ion-align-self-center ion-text-center">
-            <div *ngIf="showKeviNav" (click)="toPrevSlide(keviSlider)" 
-            (touchstart)="toPrevSlide(keviSlider)" (touchend)="showKeviNav = true">
-              <ion-icon size="large" slot="icon-only" name="arrow-back-circle-outline"></ion-icon>
-            </div>
-          </ion-col>
-          <ion-col size="8">
-            <ion-slides [options]="sliderOpts" scrollbar="true" #keviPics>
-              <ion-slide *ngFor="let kevi of keviImgs" class="ion-align-self-center" style="display:block;">
-                <img style="height: 40vh;" src="{{ kevi.url }}" tappable (click)="openPreview(kevi)">
-                <p class="image-title">
-                  {{ kevi.title }}
-                </p>
-              </ion-slide>
-            </ion-slides>
-          </ion-col>
-          <ion-col size="2" class="ion-align-self-center ion-text-center">
-            <div *ngIf="showKeviNav" (click)="toNextSlide(keviSlider)" 
-            (touchstart)="toNextSlide(keviSlider)" (touchend)="showKeviNav = true">
-              <ion-icon size="large" slot="icon-only" name="arrow-forward-circle-outline"></ion-icon>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-col>
-      <!-- Astra Pics -->
-      <ion-col size-xs="12" size-md="6" class="ion-padding">
-        <ion-row>
-          <ion-col size="12" class="ion-text-center white-background">
-            <h2>Astra</h2>
-          </ion-col>
-        </ion-row>
-        <ion-row (mouseover)="showAstraNav = true" (mouseleave)="showAstraNav = false"
-        (touchstart)="showAstraNav = true" class="gold-background">
-          <ion-col size="2" class="ion-align-self-center ion-text-center">
-            <div *ngIf="showAstraNav" (click)="toPrevSlide(astraSlider)" 
-            (touchstart)="toPrevSlide(astraSlider)" (touchend)="showAstraNav = true">
-              <ion-icon size="large" slot="icon-only" name="arrow-back-circle-outline"></ion-icon>
-            </div>
-          </ion-col>
-          <ion-col size="8">
-            <ion-slides [options]="sliderOpts" scrollbar="true" #astraPics>
-              <ion-slide *ngFor="let astra of astraImgs" class="ion-align-self-center" style="display:block;">
-                <img style="height: 40vh;" src="{{ astra.url }}" tappable (click)="openPreview(astra)">
-                <p class="image-title">
-                  {{ astra.title }}
-                </p>
-              </ion-slide>
-            </ion-slides>
-          </ion-col>
-          <ion-col size="2" class="ion-align-self-center ion-text-center">
-            <div *ngIf="showAstraNav" (click)="toNextSlide(astraSlider)" 
-            (touchstart)="toNextSlide(astraSlider)" (touchend)="showAstraNav = true">
-              <ion-icon size="large" slot="icon-only" name="arrow-forward-circle-outline"></ion-icon>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-col>
-      <!-- LitterA Pics -->
-      <!-- <ion-col size-xs="12" size-md="6" class="ion-padding">
-        <ion-row class="ion-no-padding">
-          <ion-col size="12" class="ion-text-center white-background">
-            <h2>Litter A</h2>
-          </ion-col>
-        </ion-row>
-        <ion-row (mouseover)="showLitterANav = true" (mouseleave)="showLitterANav = false"
-        (touchstart)="showLitterANav = true" class="gold-background">
-          <ion-col size="2" class="ion-align-self-center ion-text-center">
-            <div *ngIf="showLitterANav" (click)="toPrevSlide(litterASlider)" 
-            (touchstart)="toPrevSlide(litterASlider)" (touchend)="showLitterANav = true">
-              <ion-icon size="large" slot="icon-only" name="arrow-back-circle-outline"></ion-icon>
-            </div>
-          </ion-col>
-          <ion-col size="8">
-            <ion-slides [options]="sliderOpts" scrollbar="true" #litterAPics>
-              <ion-slide *ngFor="let litterA of litterAImgs" class="ion-align-self-center" style="display:block;">
-                  <img style="height: 40vh;" src="{{ litterA.url }}" tappable (click)="openPreview(litterA)">
-                  <p class="image-title">
-                    {{ litterA.title }}
-                  </p>
-              </ion-slide>
-            </ion-slides>
-          </ion-col>
-          <ion-col size="2" class="ion-align-self-center ion-text-center">
-            <div *ngIf="showLitterANav" (click)="toNextSlide(litterASlider)" 
-            (touchstart)="toNextSlide(litterASlider)" (touchend)="showLitterANav = true">
-              <ion-icon size="large" slot="icon-only" name="arrow-forward-circle-outline"></ion-icon>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-col> -->
-    </ion-row>
-    <!-- End Row of Picture Albums -->
-    <!-- Testing the new album look -->
+    <!-- Picture Albums -->
     <ion-row>
       <ion-col size-xs="12" size-md="8" offset-md="2" class="ion-padding">
         <ion-row class="ion-no-padding">
@@ -169,16 +34,16 @@
             <h2>{{ currentAlbum }}</h2>
           </ion-col>
         </ion-row>
-        <ion-row (mouseover)="showLitterANav = true" (mouseleave)="showLitterANav = false"
-          (touchstart)="showLitterANav = true" class="gold-background">
+        <ion-row (mouseover)="showPicNav = true" (mouseleave)="showPicNav = false"
+          (touchstart)="showPicNav = true" class="gold-background">
           <ion-col size="2" class="ion-align-self-center ion-text-center">
-            <div *ngIf="showLitterANav" (click)="toPrevSlide(litterASlider)" 
-            (touchstart)="toPrevSlide(litterASlider)" (touchend)="showLitterANav = true">
+            <div *ngIf="showPicNav" (click)="toPrevSlide(picSlider)" 
+            (touchstart)="toPrevSlide(picSlider)" (touchend)="showPicNav = true">
               <ion-icon size="large" slot="icon-only" name="arrow-back-circle-outline"></ion-icon>
             </div>
           </ion-col>
           <ion-col size="8">
-            <ion-slides [options]="sliderOpts" scrollbar="true" #litterAPics>
+            <ion-slides [options]="sliderOpts" scrollbar="true" #fkPics>
               <ion-slide *ngFor="let photo of photos" class="ion-align-self-center" style="display:block;">
                   <img style="height: 40vh;" src="{{ photo.imageUrl }}" tappable (click)="openPreview(photo)">
                   <p class="image-title">
@@ -188,15 +53,15 @@
             </ion-slides>
           </ion-col>
           <ion-col size="2" class="ion-align-self-center ion-text-center">
-            <div *ngIf="showLitterANav" (click)="toNextSlide(litterASlider)" 
-            (touchstart)="toNextSlide(litterASlider)" (touchend)="showLitterANav = true">
+            <div *ngIf="showPicNav" (click)="toNextSlide(picSlider)" 
+            (touchstart)="toNextSlide(picSlider)" (touchend)="showPicNav = true">
               <ion-icon size="large" slot="icon-only" name="arrow-forward-circle-outline"></ion-icon>
             </div>
           </ion-col>
         </ion-row>
       </ion-col>
     </ion-row>
-    
+    <!-- Choose Albums or All Pictures -->
     <ion-row>
       <ion-col>
         <div style="text-align: center;">
