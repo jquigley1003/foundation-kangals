@@ -21,7 +21,8 @@ import { UploadPhotoModalModule } from 'src/app/shared/photo/upload-photo-modal/
     FooterModule,
     PhotoModalModule,
     AlbumModalModule,
-    UploadPhotoModalModule
+    UploadPhotoModalModule,
+    FooterModule
   ],
   declarations: [PhotosPage]
 })
