@@ -18,7 +18,7 @@
     </ion-col>
 
     <ion-col size="12" class="ion-text-center">
-      <h1>3rd - Take a picture</h1>
+      <h1>3rd - Add a picture</h1>
       <ion-button (click)="takePicture()" expand="block">
         <ion-icon name="camera" slot="start"></ion-icon>
         Capture image
@@ -31,6 +31,10 @@
     [disabled]="photo.title === '' || !capturedImage">
       <ion-icon slot="start" name="checkmark"></ion-icon>
       Upload New Photo
+    </ion-button>
+    <ion-button color="warning" (click)="closeUploadPhotoModal()">
+      <ion-icon slot="start" name="close-circle"></ion-icon>
+      Cancel
     </ion-button>
   </div>
 </ion-content>

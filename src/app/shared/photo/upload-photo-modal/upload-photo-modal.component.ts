@@ -4,11 +4,12 @@ import { ModalController, NavParams } from '@ionic/angular';
 
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
-import { take } from 'rxjs/operators';
+import { catchError, take } from 'rxjs/operators';
 
 import { Photo } from '../../models/photo.model';
 import { LoadingService } from '../../notify/loading.service';
 import { PhotoService } from '../photo.service';
+import { AlertService } from '../../notify/alert.service';
 
 @Component({
   selector: 'app-upload-photo-modal',
@@ -32,6 +33,7 @@ export class UploadPhotoModalComponent implements OnInit {
     private loadingService: LoadingService,
     private modalCtrl: ModalController,
     private photoService: PhotoService,
+    private alertService: AlertService,
     private navParams: NavParams
   ) { }
 
@@ -59,10 +61,22 @@ export class UploadPhotoModalComponent implements OnInit {
     await this.loadingService.presentLoading(
       'Saving your photo...', 'bubbles', 15000);
     this.photoService.addPhoto(this.photo)
-    .pipe(take(1))
-    .subscribe(() => {
-      this.loadingService.dismissLoading();
-      this.modalCtrl.dismiss();
+    .pipe(
+      take(1),
+      catchError(err => this.alertService.presentAlert(
+          'Sorry, something went wrong.',
+          'Error in database',
+          err,
+          ['OK']
+        ))
+      )
+    .subscribe(data => {
+        this.loadingService.dismissLoading();
+        this.modalCtrl.dismiss();
     });
+  }
+
+  closeUploadPhotoModal() {
+    this.modalCtrl.dismiss();
   }
 }

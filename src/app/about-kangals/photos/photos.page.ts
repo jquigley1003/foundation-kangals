@@ -6,14 +6,14 @@ import { AnimationController, Animation, ModalController, IonSlides, NavControll
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { Album } from 'src/app/shared/models/album.model';
 import { PhotoModalComponent } from 'src/app/shared/photo/photo-modal/photo-modal.component';
 import { AlbumModalComponent } from 'src/app/shared/photo/album-modal/album-modal.component';
 import { UploadPhotoModalComponent } from 'src/app/shared/photo/upload-photo-modal/upload-photo-modal.component';
-import { PhotoService } from 'src/app/shared/photo/photo.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
-import { Photo } from 'src/app/shared/models/photo.model';
 import { AlertService } from 'src/app/shared/notify/alert.service';
+import { PhotoService } from 'src/app/shared/photo/photo.service';
+import { Photo } from 'src/app/shared/models/photo.model';
+import { Album } from 'src/app/shared/models/album.model';
 
 @Component({
   selector: 'app-photos',
@@ -37,14 +37,14 @@ export class PhotosPage implements OnInit, AfterViewInit, OnDestroy {
     zoom: false,
     slidesPerView: 1,
     centeredSlides: true,
-    spaceBetween: 20
+    spaceBetween: 10
   };
 
   albums$: Observable<any>;
-  albums: Array<any> = [];
+  albums: Array<Album> = [];
   photos$: Observable<any>;
-  allPhotos: Array<any> = [];
-  photos: Array<any> = [];
+  allPhotos: Array<Photo> = [];
+  photos: Array<Photo> = [];
   ngUnsubscribe = new Subject<void>();
 
   constructor(
@@ -75,7 +75,7 @@ export class PhotosPage implements OnInit, AfterViewInit, OnDestroy {
     this.photosTitleAnim.play();
 
     this.currentUser = this.authService.currentUser;
-    console.log('photo page currentUser: ', this.currentUser);
+    // console.log('photo page currentUser: ', this.currentUser);
   }
 
   getAlbums() {
@@ -185,7 +185,8 @@ export class PhotosPage implements OnInit, AfterViewInit, OnDestroy {
       swipeToClose: true,
       component: UploadPhotoModalComponent,
       componentProps: {
-        creatorId: this.currentUser.uid,
+        // creatorId: this.currentUser.uid,
+        creatorId: 123245,
         albums: this.albums
       }
     }).then(modal => {
