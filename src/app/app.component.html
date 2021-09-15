@@ -10,7 +10,8 @@
           <!-- <ion-button (click)="getCurrentUser()">Get Current User</ion-button> -->
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+            <ion-item *ngIf="currentUser"
+            routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
@@ -32,10 +33,10 @@
         <ion-list id="inbox-list">
           <ion-list-header>Access</ion-list-header>
           <ion-menu-toggle>
-            <!-- <ion-item *ngIf="!userFullName" lines="none" detail="false">
+            <ion-item *ngIf="!currentUser" lines="none" detail="false">
               <ion-icon slot="start" name="person-add-outline"></ion-icon>
               <ion-button (click)="presentRegisterModal()">Register</ion-button>
-            </ion-item> -->
+            </ion-item>
             <ion-item *ngIf="!currentUser" lines="none" detail="false">
               <ion-icon slot="start" name="log-in-outline"></ion-icon>
               <ion-button (click)="presentSignInModal()">Sign In</ion-button>

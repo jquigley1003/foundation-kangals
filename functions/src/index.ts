@@ -1,5 +1,5 @@
 import * as admin from "firebase-admin";
 
-export {registerUser, setUserRoles} from "./user";
+export {registerUser, setUserRoles, addAdmin, deleteUser} from "./user";
 
 admin.initializeApp();

@@ -52,7 +52,7 @@ export class AppComponent implements AfterViewInit {
     // !! implement if need to replace afAuth code below > this.getCurrentUser();
     this.afAuth.onAuthStateChanged(user => {
       this.currentUser = user;
-      // console.log('app component user: ', this.currentUser);
+      console.log('app component user: ', this.currentUser);
     });
   }
 

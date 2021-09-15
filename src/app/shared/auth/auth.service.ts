@@ -42,9 +42,9 @@ export class AuthService {
     const fullName = newUser.firstName + ' ' + newUser.lastName;
 
     await this.afAuth.createUserWithEmailAndPassword(newUser.email, newUser.password)
-    .then((credentials) => {
-      this.userService.createUserData(credentials.user.uid, newUser.email, newUser.firstName, newUser.lastName);
-      credentials.user.updateProfile({
+    .then(async (credentials) => {
+      await this.userService.createUserData(credentials.user.uid, newUser.email, newUser.firstName, newUser.lastName);
+      await credentials.user.updateProfile({
         displayName: fullName
       })
       .then(() => {
