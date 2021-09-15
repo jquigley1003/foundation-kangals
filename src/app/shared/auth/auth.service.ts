@@ -15,6 +15,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class AuthService {
   currentUser: User = null;
   user$: Observable<User>;
+  isAdmin: false;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -22,20 +23,24 @@ export class AuthService {
     private userService: UserService,
     private toastService: ToastService
   ) {
-    this.afAuth.onAuthStateChanged(user => {
+    this.afAuth.onAuthStateChanged(async user => {
       // console.log('Auth Service current user: ',user);
       this.currentUser = user;
+      await user.getIdTokenResult().then(async (res) =>{
+        this.isAdmin = await res.claims.admin;
+        console.log('authservice idTokenResult is: ', res.claims.admin);
+      });
     });
     // !! implement the code below if you need all current user data (address, image, etc)
-    // this.user$ = this.afAuth.authState.pipe(
-    //   switchMap(user => {
-    //     if (user) {
-    //       return this.afStore.doc<User>(`users/${user.uid}`).valueChanges();
-    //     } else {
-    //       return of (null);
-    //     }
-    //   })
-    // );
+    this.user$ = this.afAuth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.afStore.doc<User>(`users/${user.uid}`).valueChanges();
+        } else {
+          return of (null);
+        }
+      })
+    );
    }
 
   async register(newUser) {

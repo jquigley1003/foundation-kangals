@@ -18,12 +18,13 @@ import { AngularFireAuth } from '@angular/fire/auth';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnDestroy {
   @ViewChild(IonMenu) ionMenu: IonMenu;
   currentUser = null;
-  // userFullName = null;
+  userFullName = null;
   currentUser$: Observable<User>;
   ngUnsubscribe = new Subject<void>();
+  isAdmin: false;
 
   public appPages = [
     {
@@ -49,28 +50,39 @@ export class AppComponent implements AfterViewInit {
     private toastService: ToastService,
     private router: Router
   ) {
-    // !! implement if need to replace afAuth code below > this.getCurrentUser();
-    this.afAuth.onAuthStateChanged(user => {
-      this.currentUser = user;
-      console.log('app component user: ', this.currentUser);
-    });
+    // !! implement if need to replace afAuth code below > this.getCurrentUser()
+    this.initializeAuth();
   }
 
   ngAfterViewInit() {}
 
-  // getCurrentUser() {
-  //   this.currentUser$ = this.authService.user$;
-  //   this.currentUser$
-  //     .pipe(takeUntil(this.ngUnsubscribe))
-  //     .subscribe(data => {
-  //     if(data) {
-  //       this.userFullName = data.firstName + ' ' + data.lastName;
-  //     } else {
-  //       this.userFullName = null;
-  //     }
-  //     console.log('app component getCurrentUser = ', this.userFullName);
-  //   });
-  // }
+  async initializeAuth() {
+    this.getCurrentUser();
+
+    this.afAuth.onAuthStateChanged(async user => {
+      // console.log('Auth Service current user: ',user);
+      this.currentUser = user;
+      console.log('app component user: ', this.currentUser);
+      await user.getIdTokenResult().then(async (res) =>{
+        this.isAdmin = await res.claims.admin;
+        console.log('app component admin idTokenResult is: ', this.isAdmin);
+      });
+    });
+  }
+
+  getCurrentUser() {
+    this.currentUser$ = this.authService.user$;
+    this.currentUser$
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(data => {
+      if(data) {
+        this.userFullName = data.firstName + ' ' + data.lastName;
+      } else {
+        this.userFullName = null;
+      }
+      console.log('app component getCurrentUser = ', this.userFullName);
+    });
+  }
 
   closeMenu() {
     this.ionMenu.close();
@@ -112,8 +124,8 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  // ngOnDestroy() {
-  //   this.ngUnsubscribe.next();
-  //   this.ngUnsubscribe.complete();
-  // }
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 }

@@ -10,6 +10,18 @@
       <ion-col>
         <h1>Manage Users</h1>
       </ion-col>
+      <ion-card *ngFor="let user of users">
+        <ion-card-title>
+          <h2>{{ user.firstName}} {{ user.lastName }}</h2>
+        </ion-card-title>
+        <ion-card-content>
+          <ion-buttons>
+            <ion-button>Update Email</ion-button>
+            <ion-button>Update Email</ion-button>
+            <ion-button>Update Email</ion-button>
+          </ion-buttons>
+        </ion-card-content>
+      </ion-card>
     </ion-row>
     <ion-row>
       <ion-col>

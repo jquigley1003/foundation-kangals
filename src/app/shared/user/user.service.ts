@@ -1,6 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { User } from '../models/user.model';
 import { LoadingService } from '../notify/loading.service';
@@ -9,15 +11,19 @@ import { ToastService } from '../notify/toast.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService implements OnDestroy{
   msg: string;
+  allUsers$: BehaviorSubject<any[]> = new BehaviorSubject<any>([]);
+  ngUnsubscribe = new Subject<void>();
 
   constructor(
     private afStore: AngularFirestore,
     private afFunctions: AngularFireFunctions,
     private loadingService: LoadingService,
     private toastService: ToastService
-  ) {}
+  ) {
+    this.fetchUsers();
+  }
 
   createUserData(uid: string, email: string, firstName: string, lastName: string) {
     const data: User = {
@@ -40,6 +46,22 @@ export class UserService {
     };
     return this.afStore.doc(`users/${uid}`).set(data);
     // cloud function will automatically set the custom user claims (admin: false);
+  }
+
+  fetchUsers() {
+    this.afStore.collection<User>('users', ref => ref.orderBy('lastName'))
+    .snapshotChanges()
+    .pipe(takeUntil(this.ngUnsubscribe))
+    .subscribe(
+        res => {
+        this.allUsers$.next(res);
+      },
+    err => console.log('Error retrieving Users ', err.error)
+    );
+  }
+
+  getAllUsers() {
+    return this.allUsers$.asObservable();
   }
 
   async makeUserAdmin(user: User) {
@@ -83,5 +105,10 @@ export class UserService {
           }], 5000);
         // console.log({err});
       });
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }
