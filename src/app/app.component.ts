@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 import { IonMenu, ModalController } from '@ionic/angular';
 
@@ -11,7 +12,7 @@ import { SignInModalComponent } from './shared/auth/sign-in-modal/sign-in-modal.
 import { User } from './shared/models/user.model';
 import { AuthService } from './shared/auth/auth.service';
 import { ToastService } from './shared/notify/toast.service';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { UserService } from './shared/user/user.service';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   userFullName = null;
   currentUser$: Observable<User>;
   ngUnsubscribe = new Subject<void>();
-  isAdmin: false;
+  isAdmin = false;
 
   public appPages = [
     {
@@ -47,27 +48,44 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     private modalCtrl: ModalController,
     private afAuth: AngularFireAuth,
     private authService: AuthService,
+    private userService: UserService,
     private toastService: ToastService,
     private router: Router
   ) {
     // !! implement if need to replace afAuth code below > this.getCurrentUser()
-    this.initializeAuth();
+    this.initializeUsers();
   }
 
   ngAfterViewInit() {}
 
-  async initializeAuth() {
+  initializeUsers() {
     this.getCurrentUser();
-
-    this.afAuth.onAuthStateChanged(async user => {
-      // console.log('Auth Service current user: ',user);
-      this.currentUser = user;
-      console.log('app component user: ', this.currentUser);
-      await user.getIdTokenResult().then(async (res) =>{
-        this.isAdmin = await res.claims.admin;
+    this.authService.currentUser$
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(data => {
+        this.currentUser = data;
+        console.log('app component current user: ',this.currentUser);
+      });
+    this.authService.isAdmin$
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(async data => {
+        this.isAdmin = data;
         console.log('app component admin idTokenResult is: ', this.isAdmin);
       });
-    });
+
+    // this.afAuth.onAuthStateChanged(async user => {
+    //   // console.log('Auth Service current user: ',user);
+    //   this.currentUser = user;
+    //   console.log('app component user: ', this.currentUser);
+    //   if(user) {
+    //     user.getIdTokenResult().then((res) =>{
+    //       this.isAdmin = res.claims.admin;
+    //       console.log('app component admin idTokenResult is: ', this.isAdmin);
+    //     });
+    //   } else {
+    //     this.isAdmin = false;
+    //   }
+    // });
   }
 
   getCurrentUser() {

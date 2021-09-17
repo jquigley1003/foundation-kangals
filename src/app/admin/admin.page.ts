@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { User } from '../shared/models/user.model';
@@ -16,19 +17,34 @@ export class AdminPage implements OnInit, OnDestroy {
   loadedUsers: User[];
 
   constructor(
+    private router: Router,
     private userService: UserService
   ) { }
 
   ngOnInit() {
+    this.getAllUsers();
   }
 
-  getAllUsers() {
-    this.userService.getAllUsers()
+  async getAllUsers() {
+    this.userService.allUsers$
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(data => {
+      .subscribe(async data => {
         this.users = data;
         this.loadedUsers = this.users;
+        console.log('admin page users: ', this.users);
       });
+  }
+
+  makeAdmin(user) {
+    this.userService.makeUserAdmin(user);
+  }
+
+  removeAdmin(user) {
+    this.userService.removeAdminRole(user);
+  }
+
+  goHome() {
+    this.router.navigate(['/home']);
   }
 
   ngOnDestroy() {

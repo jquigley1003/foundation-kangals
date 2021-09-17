@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 import { UserService } from '../user/user.service';
 
 import { User } from '../models/user.model';
 import { ToastService } from '../notify/toast.service';
-import { from, Observable, of } from 'rxjs';
+import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 
@@ -13,24 +14,36 @@ import { AngularFirestore } from '@angular/fire/firestore';
   providedIn: 'root'
 })
 export class AuthService {
-  currentUser: User = null;
   user$: Observable<User>;
-  isAdmin: false;
+  currentUser$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  isAdmin$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private afAuth: AngularFireAuth,
     private afStore: AngularFirestore,
+    private router: Router,
     private userService: UserService,
     private toastService: ToastService
   ) {
+    this.initializeAuth();
+   }
+
+  initializeAuth() {
     this.afAuth.onAuthStateChanged(async user => {
       // console.log('Auth Service current user: ',user);
-      this.currentUser = user;
-      await user.getIdTokenResult().then(async (res) =>{
-        this.isAdmin = await res.claims.admin;
-        console.log('authservice idTokenResult is: ', res.claims.admin);
-      });
-    });
+      if(user) {
+        this.currentUser$.next(user);
+        await user.getIdTokenResult().then( (res) =>{
+          this.isAdmin$.next(res.claims.admin);
+          console.log('authservice idTokenResult is: ', res.claims.admin);
+        });
+      } else {
+        this.currentUser$.next(null);
+        this.isAdmin$.next(false);
+      }
+    })
+    .then(() => this.isAdmin$.asObservable())
+    .then(() => this.currentUser$.asObservable());
     // !! implement the code below if you need all current user data (address, image, etc)
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -41,7 +54,7 @@ export class AuthService {
         }
       })
     );
-   }
+  }
 
   async register(newUser) {
     const fullName = newUser.firstName + ' ' + newUser.lastName;
@@ -74,8 +87,9 @@ export class AuthService {
     return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
-  signOut() {
-    return this.afAuth.signOut();
+  async signOut() {
+    await this.afAuth.signOut();
+    return this.router.navigate(['./home']);
   }
 
   private handleError(error: Error) {

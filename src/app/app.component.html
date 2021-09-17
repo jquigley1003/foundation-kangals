@@ -45,7 +45,7 @@
               <ion-icon slot="start" name="log-out-outline"></ion-icon>
               <ion-button (click)="signOut()">Sign Out</ion-button>
             </ion-item>
-            <ion-item *ngIf="!isAdmin" lines="none" detail="false" 
+            <ion-item *ngIf="isAdmin" lines="none" detail="false" 
             routerDirection="root" [routerLink]="['/admin']" routerLinkActive="selected">
               <ion-icon slot="start" name="business-outline"></ion-icon>
               <ion-button>Admin Dashboard</ion-button>
