@@ -11,7 +11,7 @@ export class DetectMobileService {
   checkForMobile() {
     if (navigator.maxTouchPoints > 0) {
       this.hasTouchScreen = true;
-    } else if (navigator.msMaxTouchPoints > 0) {
+    } else if (navigator.maxTouchPoints > 0) {
       this.hasTouchScreen = true;
     } else {
       const mQ = window.matchMedia && matchMedia('(pointer:coarse)');

@@ -35,7 +35,7 @@ export class AuthService {
         this.currentUser$.next(user);
         await user.getIdTokenResult().then((res) =>{
           this.isAdmin$.next(res.claims.admin);
-          console.log('authservice idTokenResult is: ', res.claims.admin);
+          // console.log('authservice idTokenResult is: ', res.claims.admin);
         });
       } else {
         this.currentUser$.next(null);
@@ -101,7 +101,7 @@ export class AuthService {
         text: 'OK',
         role: 'cancel',
         handler: () => {
-          console.log('dismiss toast message');
+          // console.log('dismiss toast message');
         }
       }], 5000);
   }
