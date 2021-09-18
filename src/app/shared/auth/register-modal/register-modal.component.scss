@@ -1,0 +1,36 @@
+ion-content {
+	--background: url('./../../../../assets/background/gray-brick.jpg');
+}
+
+ion-item {
+	--background: rgba(var(--ion-color-medium-rgb), 0.7);
+	--border-color: var(--ion-color-primary);
+	--border-style: solid;
+	--border-width: 2px;
+	--border-radius: 5px;
+	--padding-bottom: 10px;
+	margin-bottom: 5px;
+	ion-label {
+		color: var(--ion-color-light);
+		font-size: 1.5em;
+		text-shadow: var(--ion-color-dark) 2px -2px 1px;
+	}
+	ion-input {
+		color: var(--ion-color-light);
+		font-size: 1.5em;
+	}
+}
+
+h2 {
+	color: var(--ion-color-light);
+	text-shadow: var(--ion-color-dark) 5px -2px 5px;
+}
+
+.errors {
+	font-size: small;
+	color: #fff;
+	background: var(--ion-color-danger);
+	padding-left: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}

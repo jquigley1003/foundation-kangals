@@ -81,6 +81,22 @@ export class RegisterModalComponent implements OnInit {
     }
   }
 
+  get firstName() {
+    return this.registerForm.get('firstName');
+  }
+
+  get lastName() {
+    return this.registerForm.get('lastName');
+  }
+
+  get email() {
+    return this.registerForm.get('email');
+  }
+
+  get password() {
+    return this.registerForm.get('password');
+  }
+
   closeModal() {
     this.modalCtrl.dismiss();
   }

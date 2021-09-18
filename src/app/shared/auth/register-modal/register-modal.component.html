@@ -3,31 +3,41 @@
     <ion-row>
       <ion-col>
         <h2 class="ion-text-center">Register for Foundation Kangals</h2>
-
-        <form [formGroup]="registerForm" (ngSubmit)="onRegisterForm()" (keyup.enter)="onRegisterForm()">
-            
-        <ion-item>
-          <ion-label position="floating">First Name</ion-label>
-          <ion-input type="text" formControlName="firstName" required></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Last Name</ion-label>
-          <ion-input type="text" formControlName="lastName" required></ion-input>
-        </ion-item>
+        <form [formGroup]="registerForm" (ngSubmit)="onRegisterForm()" (keyup.enter)="onRegisterForm()">  
+          <ion-item>
+            <ion-label position="floating">First Name</ion-label>
+            <ion-input type="text" formControlName="firstName" required></ion-input>
+          </ion-item>
+          <div *ngIf="(firstName.dirty || firstName.touched) && firstName.errors" class="errors">
+            <span *ngIf="firstName.errors?.required">First Name is required</span>
+          </div>
+          <ion-item>
+            <ion-label position="floating">Last Name</ion-label>
+            <ion-input type="text" formControlName="lastName" required></ion-input>
+          </ion-item>
+          <div *ngIf="(lastName.dirty || lastName.touched) && lastName.errors" class="errors">
+            <span *ngIf="lastName.errors?.required">Last Name is required</span>
+          </div>
           <ion-item>
             <ion-label position="floating">Email</ion-label>
             <ion-input type="email" formControlName="email" required></ion-input>
           </ion-item>
+          <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+            <span *ngIf="email.errors?.required">Email is required</span>
+            <span *ngIf="email.errors?.pattern">Valid email format required</span>
+          </div>
           <ion-item>
             <ion-label position="floating">Password</ion-label>
             <ion-input [type]="passwordType" formControlName="password" required></ion-input>
             <ion-icon name="eye" [color]="passwordShow === true ? 'secondary' : 'primary'"
               slot="end" (click)="togglePassword()"></ion-icon>
           </ion-item>
-
+          <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+            <span *ngIf="password.errors?.required">Password is required</span>
+          </div>
           <ion-row>
             <ion-col class="ion-text-end">
-              <ion-button fill="clear" (click)="closeModal()">Cancel</ion-button>
+              <ion-button fill="clear" fill="solid" color="secondary" (click)="closeModal()">Cancel</ion-button>
               <ion-button type="submit" [disabled]="!registerForm.valid">Submit</ion-button>
             </ion-col>
           </ion-row>
