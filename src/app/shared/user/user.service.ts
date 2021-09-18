@@ -103,7 +103,7 @@ export class UserService implements OnDestroy{
             text: 'OK',
             role: 'cancel',
             handler: () => {
-              console.log('dismiss toast message');
+              // console.log('dismiss toast message');
             }
           }], 5000);
         // console.log({resp});
@@ -117,7 +117,7 @@ export class UserService implements OnDestroy{
             text: 'OK',
             role: 'cancel',
             handler: () => {
-              console.log('dismiss toast message');
+              // console.log('dismiss toast message');
             }
           }], 5000);
         // console.log({err});
@@ -146,7 +146,7 @@ export class UserService implements OnDestroy{
             text: 'OK',
             role: 'cancel',
             handler: () => {
-              console.log('dismiss toast message');
+              // console.log('dismiss toast message');
             }
           }], 5000);
         // console.log({resp});
@@ -160,7 +160,7 @@ export class UserService implements OnDestroy{
             text: 'OK',
             role: 'cancel',
             handler: () => {
-              console.log('dismiss toast message');
+              // console.log('dismiss toast message');
             }
           }], 5000);
         // console.log({err});
