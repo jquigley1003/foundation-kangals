@@ -72,7 +72,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         this.isAdmin = data;
         console.log('app component admin idTokenResult is: ', this.isAdmin);
       });
-
+      console.log('date: ',new Date().toISOString());
     // this.afAuth.onAuthStateChanged(async user => {
     //   // console.log('Auth Service current user: ',user);
     //   this.currentUser = user;

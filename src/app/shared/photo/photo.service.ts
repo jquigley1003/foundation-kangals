@@ -71,7 +71,7 @@ export class PhotoService implements OnDestroy {
 
   addPhoto(photo: Photo) {
     console.log('photo service user id: ', this.currentUser);
-    const timeStamp = new Date().getTime();
+    const timeStamp = new Date().toISOString();
     const newName = `${timeStamp}-FK.png`;
     const storageRef: AngularFireStorageReference = this.afStorage.ref(`/photos/${newName}`);
 

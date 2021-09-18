@@ -33,7 +33,7 @@ export class AuthService {
       // console.log('Auth Service current user: ',user);
       if(user) {
         this.currentUser$.next(user);
-        await user.getIdTokenResult().then( (res) =>{
+        await user.getIdTokenResult().then((res) =>{
           this.isAdmin$.next(res.claims.admin);
           console.log('authservice idTokenResult is: ', res.claims.admin);
         });
@@ -42,8 +42,8 @@ export class AuthService {
         this.isAdmin$.next(false);
       }
     })
-    .then(() => this.isAdmin$.asObservable())
-    .then(() => this.currentUser$.asObservable());
+    .then(() => this.currentUser$.asObservable())
+    .then(() => this.isAdmin$.asObservable());
     // !! implement the code below if you need all current user data (address, image, etc)
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
