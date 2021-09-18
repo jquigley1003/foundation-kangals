@@ -103,6 +103,8 @@ export const addAdmin = functions.https.onCall((data, context) => {
           result: `Request fulfilled and Firebase collection updated! 
           ${userEmail} is now an admin.`,
         };
+      }).catch((err) => {
+        console.log(err);
       });
     });
   } else {
@@ -110,6 +112,42 @@ export const addAdmin = functions.https.onCall((data, context) => {
   }
 });
 
+export const removeAdmin = functions.https.onCall((data, context) => {
+  if (context.auth) {
+    // if (context.auth.token.admin !== true) {
+    //   return {
+    //     error: `Request not authorized.
+    //     You must be an admin to remove this role for ${data.email}.`,
+    //   };
+    // }
+    const userEmail = data.email;
+    const userId = data.uid;
+    return removeAdminRole(userId).then(() => {
+      const users = admin.firestore().collection("users");
+      return users.doc(userId).update({
+        roles: {
+          admin: false,
+        },
+      }).then(() => {
+        return {
+          result: `${userEmail} is no longer an admin. 
+          Firebase collection updated!`,
+        };
+      });
+    });
+  } else {
+    return null;
+  }
+});
+
+// automatically delete user from firebase authentication
+export const deleteUser = functions.firestore.document("users/{userID}")
+    .onDelete((snap, context) => {
+      return admin.auth().deleteUser(snap.id)
+          .then(() => console.log("Deleted user with ID:" + snap.id))
+          .catch((error) => console.error(
+              "There was an error while deleting user:", error));
+    });
 /**
  * @param {string} userId - user id
  * @return {void}
@@ -120,10 +158,12 @@ function grantAdminRole(userId: string): Promise<void> {
   });
 }
 
-export const deleteUser = functions.firestore.document("users/{userID}")
-    .onDelete((snap, context) => {
-      return admin.auth().deleteUser(snap.id)
-          .then(() => console.log("Deleted user with ID:" + snap.id))
-          .catch((error) => console.error(
-              "There was an error while deleting user:", error));
-    });
+/**
+ * @param {string} userId - user id
+ * @return {void}
+ */
+function removeAdminRole(userId: string): Promise<void> {
+  return admin.auth().setCustomUserClaims(userId, {
+    admin: false,
+  });
+}

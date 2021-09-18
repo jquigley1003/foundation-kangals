@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
 
-import { from, Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { from, Observable, Subject } from 'rxjs';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 
 import { Album } from '../models/album.model';
@@ -12,25 +12,28 @@ import { Photo } from '../models/photo.model';
 @Injectable({
   providedIn: 'root'
 })
-export class PhotoService {
+export class PhotoService implements OnDestroy {
   albums$ = new Observable<Album[]>();
   photos$ = new Observable<Photo[]>();
   currentUser = null;
+  ngUnsubscribe = new Subject<void>();
 
   constructor(
     private afStore: AngularFirestore,
     private afStorage: AngularFireStorage,
     private authService: AuthService
   ) {
+    this.getCurrentUser();
     this.getAlbums();
     this.getPhotos();
   }
 
-  createAlbum(album: Album) {
-    const data = {
-      title: album.title
-    };
-    return this.afStore.collection('albums').add(data);
+  getCurrentUser() {
+    this.authService.currentUser$
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(data => {
+        this.currentUser = data;
+      });
   }
 
   getAlbums() {
@@ -59,10 +62,16 @@ export class PhotoService {
     );
   }
 
+  createAlbum(album: Album) {
+    const data = {
+      title: album.title
+    };
+    return this.afStore.collection('albums').add(data);
+  }
+
   addPhoto(photo: Photo) {
-    this.currentUser = this.authService.currentUser;
     console.log('photo service user id: ', this.currentUser);
-    const timeStamp = new Date().getTime();
+    const timeStamp = new Date().toISOString();
     const newName = `${timeStamp}-FK.png`;
     const storageRef: AngularFireStorageReference = this.afStorage.ref(`/photos/${newName}`);
 
@@ -84,5 +93,10 @@ export class PhotoService {
         });
       })
     );
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

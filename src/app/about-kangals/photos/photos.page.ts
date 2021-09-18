@@ -32,6 +32,7 @@ export class PhotosPage implements OnInit, AfterViewInit, OnDestroy {
   showPicNav = false;
   photosTitleAnim: Animation;
   currentUser = null;
+  isAdmin = false;
 
   sliderOpts = {
     zoom: false,
@@ -59,9 +60,9 @@ export class PhotosPage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.getCurrentUser();
     this.getAlbums();
     this.getPhotos();
-    this.currentUser = this.authService.currentUser;
   }
 
   ngAfterViewInit() {
@@ -73,9 +74,20 @@ export class PhotosPage implements OnInit, AfterViewInit, OnDestroy {
       .fromTo('opacity', '0', '1');
 
     this.photosTitleAnim.play();
-
-    this.currentUser = this.authService.currentUser;
     // console.log('photo page currentUser: ', this.currentUser);
+  }
+
+  getCurrentUser() {
+    this.authService.currentUser$
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(data => {
+        this.currentUser = data;
+      });
+    this.authService.isAdmin$
+    .pipe(takeUntil(this.ngUnsubscribe))
+    .subscribe(data => {
+      this.isAdmin = data;
+    });
   }
 
   getAlbums() {

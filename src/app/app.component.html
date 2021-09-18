@@ -10,7 +10,7 @@
           <!-- <ion-button (click)="getCurrentUser()">Get Current User</ion-button> -->
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item *ngIf="currentUser"
+            <ion-item
             routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
@@ -44,6 +44,11 @@
             <ion-item *ngIf="currentUser" lines="none" detail="false">
               <ion-icon slot="start" name="log-out-outline"></ion-icon>
               <ion-button (click)="signOut()">Sign Out</ion-button>
+            </ion-item>
+            <ion-item *ngIf="isAdmin" lines="none" detail="false" 
+            routerDirection="root" [routerLink]="['/admin']" routerLinkActive="selected">
+              <ion-icon slot="start" name="business-outline"></ion-icon>
+              <ion-button>Admin Dashboard</ion-button>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>

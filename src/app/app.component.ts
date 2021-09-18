@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 import { IonMenu, ModalController } from '@ionic/angular';
 
@@ -11,19 +12,20 @@ import { SignInModalComponent } from './shared/auth/sign-in-modal/sign-in-modal.
 import { User } from './shared/models/user.model';
 import { AuthService } from './shared/auth/auth.service';
 import { ToastService } from './shared/notify/toast.service';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { UserService } from './shared/user/user.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnDestroy {
   @ViewChild(IonMenu) ionMenu: IonMenu;
   currentUser = null;
-  // userFullName = null;
+  userFullName = null;
   currentUser$: Observable<User>;
   ngUnsubscribe = new Subject<void>();
+  isAdmin = false;
 
   public appPages = [
     {
@@ -46,31 +48,59 @@ export class AppComponent implements AfterViewInit {
     private modalCtrl: ModalController,
     private afAuth: AngularFireAuth,
     private authService: AuthService,
+    private userService: UserService,
     private toastService: ToastService,
     private router: Router
   ) {
-    // !! implement if need to replace afAuth code below > this.getCurrentUser();
-    this.afAuth.onAuthStateChanged(user => {
-      this.currentUser = user;
-      console.log('app component user: ', this.currentUser);
-    });
+    // !! implement if need to replace afAuth code below > this.getCurrentUser()
+    this.initializeUsers();
   }
 
   ngAfterViewInit() {}
 
-  // getCurrentUser() {
-  //   this.currentUser$ = this.authService.user$;
-  //   this.currentUser$
-  //     .pipe(takeUntil(this.ngUnsubscribe))
-  //     .subscribe(data => {
-  //     if(data) {
-  //       this.userFullName = data.firstName + ' ' + data.lastName;
-  //     } else {
-  //       this.userFullName = null;
-  //     }
-  //     console.log('app component getCurrentUser = ', this.userFullName);
-  //   });
-  // }
+  initializeUsers() {
+    this.getCurrentUser();
+    this.authService.currentUser$
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(data => {
+        this.currentUser = data;
+        console.log('app component current user: ',this.currentUser);
+      });
+    this.authService.isAdmin$
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(async data => {
+        this.isAdmin = data;
+        console.log('app component admin idTokenResult is: ', this.isAdmin);
+      });
+      console.log('date: ',new Date().toISOString());
+    // this.afAuth.onAuthStateChanged(async user => {
+    //   // console.log('Auth Service current user: ',user);
+    //   this.currentUser = user;
+    //   console.log('app component user: ', this.currentUser);
+    //   if(user) {
+    //     user.getIdTokenResult().then((res) =>{
+    //       this.isAdmin = res.claims.admin;
+    //       console.log('app component admin idTokenResult is: ', this.isAdmin);
+    //     });
+    //   } else {
+    //     this.isAdmin = false;
+    //   }
+    // });
+  }
+
+  getCurrentUser() {
+    this.currentUser$ = this.authService.user$;
+    this.currentUser$
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(data => {
+      if(data) {
+        this.userFullName = data.firstName + ' ' + data.lastName;
+      } else {
+        this.userFullName = null;
+      }
+      console.log('app component getCurrentUser = ', this.userFullName);
+    });
+  }
 
   closeMenu() {
     this.ionMenu.close();
@@ -112,8 +142,8 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  // ngOnDestroy() {
-  //   this.ngUnsubscribe.next();
-  //   this.ngUnsubscribe.complete();
-  // }
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 }
