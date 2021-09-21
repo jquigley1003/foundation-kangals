@@ -28,6 +28,7 @@ export class UserService implements OnDestroy{
 
   async initializeGetUsers() {
     if(!this.allUsers$) {
+      console.log('user service: subscribing allUsers$ to firestore db');
       this.allUsers$ = new BehaviorSubject<any>([]);
       await this.fetchUsers();
       this.fetchUsers$
@@ -38,6 +39,8 @@ export class UserService implements OnDestroy{
           },
         err => console.log('Error retrieving Users: ', err)
         );
+    } else {
+      console.log('user service: allUsers$ is already initialized');
     }
   }
 
@@ -164,6 +167,42 @@ export class UserService implements OnDestroy{
             }
           }], 5000);
         // console.log({err});
+      });
+  }
+
+  async deleteUser(userId) {
+    await this.loadingService.presentLoading(
+      '...please wait while we delete this user',
+      'bubbles',
+    10000,
+    );
+    this.afStore.doc(`users/${userId}`).delete()
+      .then(() => {
+        this.loadingService.dismissLoading();
+        this.toastService.presentToast(
+          'The user has been deleted!',
+          'middle',
+          [{
+            text: 'OK',
+            role: 'cancel',
+            handler: () => {
+              console.log('dismiss toast message');
+            }
+          }], 5000 );
+      })
+      .catch(err => {
+        this.loadingService.dismissLoading();
+        this.toastService.presentToast(
+          'You do not have the credentials to delete users!',
+          'middle',
+          [{
+            text: 'OK',
+            role: 'cancel',
+            handler: () => {
+              console.log('dismiss toast message');
+            }
+          }], 5000);
+        // console.log(err);
       });
   }
 

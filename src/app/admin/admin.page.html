@@ -30,7 +30,7 @@
                 Add Admin Role</ion-button>
               <ion-button (click)="removeAdmin(user)" *ngIf="user.roles.admin">
                 Remove Admin Role</ion-button>
-              <ion-button>Delete</ion-button>
+              <ion-button (click)="deleteUser(user)">Delete</ion-button>
             </ion-buttons>
           </ion-card-content>
         </ion-card>

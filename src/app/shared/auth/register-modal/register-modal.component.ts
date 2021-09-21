@@ -50,15 +50,9 @@ export class RegisterModalComponent implements OnInit {
     await this.loadingService.presentLoading(
       'Registering in process...', 'bubbles', 15000);
 
-    this.authService.register(data)
+    await this.authService.register(data)
     .then(async () => {
       this.loadingService.dismissLoading();
-      await this.alertService.presentAlert(
-        'Thank You For Registering!',
-        'We sent you an email for verification.',
-        'Click the link in the email to complete your registration',
-        ['OK']
-      );
       this.router.navigate(['/home']);
       this.authService.signOut();
     }, async err => {
