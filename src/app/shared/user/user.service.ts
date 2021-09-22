@@ -28,7 +28,6 @@ export class UserService implements OnDestroy{
 
   async initializeGetUsers() {
     if(!this.allUsers$) {
-      console.log('user service: subscribing allUsers$ to firestore db');
       this.allUsers$ = new BehaviorSubject<any>([]);
       await this.fetchUsers();
       this.fetchUsers$
@@ -40,7 +39,6 @@ export class UserService implements OnDestroy{
         err => console.log('Error retrieving Users: ', err)
         );
     } else {
-      console.log('user service: allUsers$ is already initialized');
     }
   }
 
@@ -105,11 +103,7 @@ export class UserService implements OnDestroy{
           [{
             text: 'OK',
             role: 'cancel',
-            handler: () => {
-              // console.log('dismiss toast message');
-            }
           }], 5000);
-        // console.log({resp});
       })
       .catch(err => {
         this.loadingService.dismissLoading();
@@ -119,11 +113,7 @@ export class UserService implements OnDestroy{
           [{
             text: 'OK',
             role: 'cancel',
-            handler: () => {
-              // console.log('dismiss toast message');
-            }
           }], 5000);
-        // console.log({err});
       });
   }
 
@@ -148,11 +138,7 @@ export class UserService implements OnDestroy{
           [{
             text: 'OK',
             role: 'cancel',
-            handler: () => {
-              // console.log('dismiss toast message');
-            }
           }], 5000);
-        // console.log({resp});
       })
       .catch(err => {
         this.loadingService.dismissLoading();
@@ -162,11 +148,7 @@ export class UserService implements OnDestroy{
           [{
             text: 'OK',
             role: 'cancel',
-            handler: () => {
-              // console.log('dismiss toast message');
-            }
           }], 5000);
-        // console.log({err});
       });
   }
 
@@ -185,9 +167,6 @@ export class UserService implements OnDestroy{
           [{
             text: 'OK',
             role: 'cancel',
-            handler: () => {
-              console.log('dismiss toast message');
-            }
           }], 5000 );
       })
       .catch(err => {
@@ -198,11 +177,7 @@ export class UserService implements OnDestroy{
           [{
             text: 'OK',
             role: 'cancel',
-            handler: () => {
-              console.log('dismiss toast message');
-            }
           }], 5000);
-        // console.log(err);
       });
   }
 

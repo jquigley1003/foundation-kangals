@@ -109,9 +109,6 @@ export class AuthService {
       [{
         text: 'OK',
         role: 'cancel',
-        handler: () => {
-          // console.log('dismiss toast message');
-        }
       }], 15000);
   }
 }

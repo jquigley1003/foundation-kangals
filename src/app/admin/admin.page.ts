@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { User } from '../shared/models/user.model';
 import { AlertService } from '../shared/notify/alert.service';
+import { ToastService } from '../shared/notify/toast.service';
 
 import { UserService } from '../shared/user/user.service';
 
@@ -20,7 +21,8 @@ export class AdminPage implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private userService: UserService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private toastService: ToastService
   ) { }
 
   ngOnInit() {
@@ -57,6 +59,13 @@ export class AdminPage implements OnInit, OnDestroy {
           role: 'cancel',
           handler: () => {
             console.log('You did not delete '+user.firstName);
+            this.toastService.presentToast(
+              `Deletion of ${user.firstName} canceled.`,
+              'middle',
+              [{
+                text: 'OK',
+                role: 'cancel',
+              }], 5000);
           }
         },
         {
