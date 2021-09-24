@@ -1,11 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Photo } from '../shared/models/photo.model';
 import { User } from '../shared/models/user.model';
 import { AlertService } from '../shared/notify/alert.service';
 import { ToastService } from '../shared/notify/toast.service';
-
+import { PhotoModalComponent } from '../shared/photo/photo-modal/photo-modal.component';
+import { PhotoService } from '../shared/photo/photo.service';
 import { UserService } from '../shared/user/user.service';
 
 @Component({
@@ -15,18 +18,29 @@ import { UserService } from '../shared/user/user.service';
 })
 export class AdminPage implements OnInit, OnDestroy {
   ngUnsubscribe = new Subject<void>();
+  showSection = null;
   users: User[];
   loadedUsers: User[];
+  photos: Photo[];
+  loadedPhotos: Photo[];
+
 
   constructor(
     private router: Router,
+    private modalCtrl: ModalController,
     private userService: UserService,
+    private photoService: PhotoService,
     private alertService: AlertService,
-    private toastService: ToastService
+    private toastService: ToastService,
   ) { }
 
   ngOnInit() {
     this.getAllUsers();
+    this.getAllPhotos();
+  }
+
+  showAdminMenu(section) {
+    this.showSection = section;
   }
 
   async getAllUsers() {
@@ -34,9 +48,30 @@ export class AdminPage implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(async data => {
         this.users = data;
-        this.loadedUsers = this.users;
-        console.log('admin page users: ', this.users);
+        this.loadedUsers = data;
       });
+  }
+
+  initializeList() {
+    this.users = this.loadedUsers;
+  }
+
+  filterByName(event) {
+    this.initializeList();
+    const searchTerm = event.srcElement.value;
+
+    if(!searchTerm) {
+      return;
+    }
+    this.users = this.users.filter(person => {
+      if((person.firstName + ' ' + person.lastName) && searchTerm) {
+        if ((person.firstName+ ' ' + person.lastName).toLowerCase()
+          .indexOf(searchTerm.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      }
+    });
   }
 
   makeAdmin(user) {
@@ -81,6 +116,33 @@ export class AdminPage implements OnInit, OnDestroy {
 
   deleteUserConfirmed(userId) {
     this.userService.deleteUser(userId);
+  }
+
+  async getAllPhotos() {
+    this.photoService.allPhotos$
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(async data => {
+        this.photos = data;
+        this.loadedPhotos = data;
+        console.log('admin page users: ', this.users);
+      });
+  }
+
+  deletePhoto(photo: Photo) {
+    this.photoService.deletePhoto(photo);
+  }
+
+  editPhoto(photo: Photo) {
+    this.modalCtrl.create({
+      cssClass: 'fullscreen',
+      swipeToClose: true,
+      component: PhotoModalComponent,
+      componentProps: {
+        img: photo
+      }
+    }).then(modal => {
+      modal.present();
+    });
   }
 
   goHome() {
