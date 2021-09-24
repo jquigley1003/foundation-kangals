@@ -2,10 +2,15 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ModalController, NavParams } from '@ionic/angular';
+
 import { take } from 'rxjs/operators';
-import { AuthService } from '../../auth/auth.service';
+
 import { Album } from '../../models/album.model';
+import { Photo } from '../../models/photo.model';
+import { AuthService } from '../../auth/auth.service';
 import { PhotoService } from '../photo.service';
+import { AlertService } from '../../notify/alert.service';
+import { ToastService } from '../../notify/toast.service';
 
 @Component({
   selector: 'app-photo-modal',
@@ -31,7 +36,9 @@ export class PhotoModalComponent implements OnInit {
     private modalController: ModalController,
     private formBuilder: FormBuilder,
     private photoService: PhotoService,
-    private authService: AuthService
+    private authService: AuthService,
+    private alertService: AlertService,
+    private toastService: ToastService
   ) {
     this.getAllAlbums()
     .then(() => {
@@ -77,6 +84,42 @@ export class PhotoModalComponent implements OnInit {
     };
     console.log('update photo in progress: ',data);
     await this.photoService.editPhoto(this.img, data);
+  }
+
+  async onDeletePhoto(photo: Photo) {
+    this.alertService.presentAlert(
+      'Are You Sure?',
+      'You will permanently delete this photo',
+      'Choosing "Yes, Delete" will permanently remove this photo from the database',
+      [
+        {
+          text: 'Cancel',
+          cssClass: 'alertCancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('You did not delete this photo');
+            this.toastService.presentToast(
+              `Deletion of photo canceled.`,
+              'middle',
+              [{
+                text: 'OK',
+                role: 'cancel',
+              }], 5000);
+          }
+        },
+        {
+          text: 'Yes, Delete',
+          cssClass: 'alertDanger',
+          handler: () => {
+            this.deletePhotoConfirmed(photo);
+          }
+        }
+      ]
+    );
+  }
+
+  deletePhotoConfirmed(photo: Photo) {
+    this.photoService.deletePhoto(photo);
   }
 
   zoomAction(zoomIn: boolean) {

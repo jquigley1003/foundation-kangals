@@ -38,6 +38,7 @@
           <ion-button type="submit" [disabled]="!editPhotoForm.valid" >
             Update Now
           </ion-button>
+          <ion-button (click)="onDeletePhoto(img)">Delete Photo</ion-button>
         </form>
       </ion-col>
     </ion-row>
