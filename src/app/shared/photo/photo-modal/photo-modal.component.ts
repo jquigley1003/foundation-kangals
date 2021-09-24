@@ -67,7 +67,7 @@ export class PhotoModalComponent implements OnInit {
     return o1 === o2;
   }
 
-  onUpdatePhoto() {
+  async onUpdatePhoto() {
     const newTitle = this.editPhotoForm.value.title;
     const newAlbumId = this.editPhotoForm.value.album;
 
@@ -76,6 +76,7 @@ export class PhotoModalComponent implements OnInit {
       albumId: newAlbumId
     };
     console.log('update photo in progress: ',data);
+    await this.photoService.editPhoto(this.img, data);
   }
 
   zoomAction(zoomIn: boolean) {

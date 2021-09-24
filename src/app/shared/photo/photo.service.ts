@@ -112,6 +112,7 @@ export class PhotoService implements OnDestroy {
         return this.afStore.collection('photos').add({
           albumId: photo.albumId,
           title: photo.title,
+          imageName: newName,
           imageUrl: url,
           createdAt: timeStamp,
           creatorId: this.currentUser.uid
@@ -122,7 +123,7 @@ export class PhotoService implements OnDestroy {
 
   async editPhoto(photo: Photo, data){
     await this.loadingService.presentLoading(
-      '...please wait while we delete the photo',
+      '...please wait while we update the photo information',
       'bubbles',
     10000,
     );
@@ -158,7 +159,7 @@ export class PhotoService implements OnDestroy {
       'bubbles',
     10000,
     );
-    this.afStore.doc(`photos/${photo.id}`).delete()
+    await this.afStore.doc(`photos/${photo.id}`).delete()
       .then(() => {
         this.loadingService.dismissLoading();
         this.toastService.presentToast(
@@ -168,9 +169,6 @@ export class PhotoService implements OnDestroy {
             text: 'OK',
             role: 'cancel',
           }], 5000 );
-      })
-      .then(() => {
-        this.afStorage.refFromURL(photo.imageUrl).delete();
       })
       .catch(err => {
         this.loadingService.dismissLoading();
@@ -182,6 +180,7 @@ export class PhotoService implements OnDestroy {
             role: 'cancel',
           }], 5000);
       });
+      this.afStorage.refFromURL(photo.imageUrl).delete();
   }
 
   ngOnDestroy() {
