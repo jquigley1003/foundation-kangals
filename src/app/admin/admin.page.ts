@@ -128,7 +128,39 @@ export class AdminPage implements OnInit, OnDestroy {
       });
   }
 
-  deletePhoto(photo: Photo) {
+  async deletePhoto(photo: Photo) {
+    this.alertService.presentAlert(
+      'Are You Sure?',
+      'You will permanently delete this photo',
+      'Choosing "Yes, Delete" will permanently remove this photo from the database',
+      [
+        {
+          text: 'Cancel',
+          cssClass: 'alertCancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('You did not delete this photo');
+            this.toastService.presentToast(
+              `Deletion of photo canceled.`,
+              'middle',
+              [{
+                text: 'OK',
+                role: 'cancel',
+              }], 5000);
+          }
+        },
+        {
+          text: 'Yes, Delete',
+          cssClass: 'alertDanger',
+          handler: () => {
+            this.deletePhotoConfirmed(photo);
+          }
+        }
+      ]
+    );
+  }
+
+  deletePhotoConfirmed(photo: Photo) {
     this.photoService.deletePhoto(photo);
   }
 
