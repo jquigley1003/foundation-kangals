@@ -10,22 +10,23 @@
             <ion-label position="floating">Email</ion-label>
             <ion-input type="email" formControlName="email" required></ion-input>
           </ion-item>
+          <div *ngIf="email.errors && (email.dirty || email.touched)" class="errors">
+            <span *ngIf="email.errors?.required">Email is required</span>
+            <span *ngIf="email.errors?.pattern">Valid email format required</span>
+          </div>
           <ion-item>
             <ion-label position="floating">Password</ion-label>
             <ion-input [type]="passwordType" formControlName="password" required></ion-input>
             <ion-icon name="eye" [color]="passwordShow === true ? 'secondary' : 'primary'"
               slot="end" (click)="togglePassword()"></ion-icon>
           </ion-item>
-
+          <div *ngIf="password.errors && (password.dirty || password.touched)" class="errors">
+            <span *ngIf="password.errors?.required">Password is required</span>
+          </div>
           <ion-row>
             <ion-col class="ion-text-end">
-              <ion-button fill="clear" (click)="closeModal()">Cancel</ion-button>
+              <ion-button fill="clear" fill="solid" color="secondary" (click)="closeModal()">Cancel</ion-button>
               <ion-button type="submit" [disabled]="!signInForm.valid">Submit</ion-button>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-button fill="clear" (click)="onSignOut()">Sign Out</ion-button>
             </ion-col>
           </ion-row>
         </form>
