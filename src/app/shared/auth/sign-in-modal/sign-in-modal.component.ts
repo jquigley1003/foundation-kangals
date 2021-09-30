@@ -28,7 +28,7 @@ export class SignInModalComponent implements OnInit {
     private router: Router
   ) {
     this.signInForm = this.formBuilder.group({
-      email: ['', (Validators.required, Validators.pattern('.+\@.+\..+'))],
+      email: ['', (Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'))],
       password: ['', Validators.required]
     });
    }
@@ -130,6 +130,14 @@ export class SignInModalComponent implements OnInit {
       this.passwordShow = true;
       this.passwordType = 'text';
     }
+  }
+
+  get email() {
+    return this.signInForm.get('email');
+  }
+
+  get password() {
+    return this.signInForm.get('password');
   }
 
   closeModal() {

@@ -38,6 +38,7 @@ export class UserService implements OnDestroy{
           },
         err => console.log('Error retrieving Users: ', err)
         );
+    } else {
     }
   }
 
@@ -102,11 +103,7 @@ export class UserService implements OnDestroy{
           [{
             text: 'OK',
             role: 'cancel',
-            handler: () => {
-              console.log('dismiss toast message');
-            }
           }], 5000);
-        // console.log({resp});
       })
       .catch(err => {
         this.loadingService.dismissLoading();
@@ -116,11 +113,7 @@ export class UserService implements OnDestroy{
           [{
             text: 'OK',
             role: 'cancel',
-            handler: () => {
-              console.log('dismiss toast message');
-            }
           }], 5000);
-        // console.log({err});
       });
   }
 
@@ -145,11 +138,7 @@ export class UserService implements OnDestroy{
           [{
             text: 'OK',
             role: 'cancel',
-            handler: () => {
-              console.log('dismiss toast message');
-            }
           }], 5000);
-        // console.log({resp});
       })
       .catch(err => {
         this.loadingService.dismissLoading();
@@ -159,11 +148,36 @@ export class UserService implements OnDestroy{
           [{
             text: 'OK',
             role: 'cancel',
-            handler: () => {
-              console.log('dismiss toast message');
-            }
           }], 5000);
-        // console.log({err});
+      });
+  }
+
+  async deleteUser(userId) {
+    await this.loadingService.presentLoading(
+      '...please wait while we delete this user',
+      'bubbles',
+    10000,
+    );
+    this.afStore.doc(`users/${userId}`).delete()
+      .then(() => {
+        this.loadingService.dismissLoading();
+        this.toastService.presentToast(
+          'The user has been deleted!',
+          'middle',
+          [{
+            text: 'OK',
+            role: 'cancel',
+          }], 5000 );
+      })
+      .catch(err => {
+        this.loadingService.dismissLoading();
+        this.toastService.presentToast(
+          'You do not have the credentials to delete users!',
+          'middle',
+          [{
+            text: 'OK',
+            role: 'cancel',
+          }], 5000);
       });
   }
 

@@ -1,12 +1,11 @@
 <ion-content fullscreen>
   <ion-grid>
     <ion-row>
-      <ion-col class="close-fake ion-text-center">
+      <ion-col class="close-fake ion-text-center" size="12">
         <ion-button (click)="close()" fill="clear" color="light">
           <ion-icon name="close"></ion-icon>
           Close
         </ion-button>
-      
         <!-- <ion-button (click)="zoomAction(true)" fill="clear" color="light">
           <ion-icon name="add"></ion-icon>
           zoom-in
@@ -16,6 +15,31 @@
           <ion-icon name="remove"></ion-icon>
           zoom-out
         </ion-button> -->
+      </ion-col>
+      <ion-col size="12" *ngIf="isAdmin">
+        <form [formGroup]="editPhotoForm" (ngSubmit)="onUpdatePhoto()">
+          <ion-item>
+            <ion-label position="floating">Photo Title</ion-label>
+            <ion-input type="text"
+                       formControlName="title" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Photo Album</ion-label>
+            <ion-select
+            placeholder="Select One" formControlName="album" [compareWith]="compareWith">
+              <ion-select-option *ngFor="let option of currentAlbums"
+               [value]="option.id">{{ option.title }}</ion-select-option>
+              <!-- <ion-select-option fromControlName="album" value="f">Female</ion-select-option>
+              <ion-select-option fromControlName="album" value="m">Male</ion-select-option> -->
+            </ion-select>
+            <!-- <ion-input type="text"
+                       formControlName="album" required></ion-input> -->
+          </ion-item>
+          <ion-button type="submit" [disabled]="!editPhotoForm.valid" >
+            Update Now
+          </ion-button>
+          <ion-button (click)="onDeletePhoto(img)">Delete Photo</ion-button>
+        </form>
       </ion-col>
     </ion-row>
   </ion-grid>

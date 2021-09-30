@@ -9,6 +9,7 @@ import { ToastService } from '../notify/toast.service';
 import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AlertService } from '../notify/alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +18,15 @@ export class AuthService {
   user$: Observable<User>;
   currentUser$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   isAdmin$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  error = null;
 
   constructor(
     private afAuth: AngularFireAuth,
     private afStore: AngularFirestore,
     private router: Router,
     private userService: UserService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private alertService: AlertService
   ) {
     this.initializeAuth();
    }
@@ -35,7 +38,7 @@ export class AuthService {
         this.currentUser$.next(user);
         await user.getIdTokenResult().then((res) =>{
           this.isAdmin$.next(res.claims.admin);
-          console.log('authservice idTokenResult is: ', res.claims.admin);
+          // console.log('authservice idTokenResult is: ', res.claims.admin);
         });
       } else {
         this.currentUser$.next(null);
@@ -67,19 +70,25 @@ export class AuthService {
       })
       .then(() => {
         credentials.user.sendEmailVerification()
-        .then(() => {
+        .then(async () => {
           console.log('Email verification was sent');
-        }).catch((error) => {
-          console.log('Error sending verification email: ', error);
-          this.handleError(error);
+          await this.alertService.presentAlert(
+            'Thank You For Registering!',
+            'We sent you an email for verification.',
+            'Click the link in the email to complete your registration',
+            ['OK']
+          );
+        }).catch((err) => {
+          console.log('Error sending verification email: ', err);
+          this.handleError(err);
         });
-      }).catch((error) => {
-        console.log('Error adding displayName: ', error);
-        this.handleError(error);
+      }).catch((err) => {
+        console.log('Error adding displayName: ', err);
+        this.handleError(err);
       });
-    }).catch((error) => {
-      console.log('Error creating new user: ', error);
-      this.handleError(error);
+    }).catch((err) => {
+      console.log('Error creating new user: ', err);
+      this.handleError(err);
     });
   }
 
@@ -100,9 +109,6 @@ export class AuthService {
       [{
         text: 'OK',
         role: 'cancel',
-        handler: () => {
-          console.log('dismiss toast message');
-        }
-      }], 5000);
+      }], 15000);
   }
 }

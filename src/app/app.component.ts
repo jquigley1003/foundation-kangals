@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
 
 import { IonMenu, ModalController } from '@ionic/angular';
 
@@ -12,7 +11,6 @@ import { SignInModalComponent } from './shared/auth/sign-in-modal/sign-in-modal.
 import { User } from './shared/models/user.model';
 import { AuthService } from './shared/auth/auth.service';
 import { ToastService } from './shared/notify/toast.service';
-import { UserService } from './shared/user/user.service';
 
 @Component({
   selector: 'app-root',
@@ -46,9 +44,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   ];
   constructor(
     private modalCtrl: ModalController,
-    private afAuth: AngularFireAuth,
     private authService: AuthService,
-    private userService: UserService,
     private toastService: ToastService,
     private router: Router
   ) {
@@ -64,28 +60,14 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(data => {
         this.currentUser = data;
-        console.log('app component current user: ',this.currentUser);
+        // console.log('app component current user: ',this.currentUser);
       });
     this.authService.isAdmin$
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(async data => {
         this.isAdmin = data;
-        console.log('app component admin idTokenResult is: ', this.isAdmin);
+        // console.log('app component admin idTokenResult is: ', this.isAdmin);
       });
-      console.log('date: ',new Date().toISOString());
-    // this.afAuth.onAuthStateChanged(async user => {
-    //   // console.log('Auth Service current user: ',user);
-    //   this.currentUser = user;
-    //   console.log('app component user: ', this.currentUser);
-    //   if(user) {
-    //     user.getIdTokenResult().then((res) =>{
-    //       this.isAdmin = res.claims.admin;
-    //       console.log('app component admin idTokenResult is: ', this.isAdmin);
-    //     });
-    //   } else {
-    //     this.isAdmin = false;
-    //   }
-    // });
   }
 
   getCurrentUser() {
@@ -98,7 +80,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       } else {
         this.userFullName = null;
       }
-      console.log('app component getCurrentUser = ', this.userFullName);
+      // console.log('app component getCurrentUser = ', this.userFullName);
     });
   }
 
