@@ -138,9 +138,6 @@ export class PhotoService implements OnDestroy {
             role: 'cancel',
           }], 5000 );
       })
-      .then(() => {
-        this.afStorage.refFromURL(photo.imageUrl).delete();
-      })
       .catch(err => {
         this.loadingService.dismissLoading();
         this.toastService.presentToast(
