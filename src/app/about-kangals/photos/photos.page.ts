@@ -62,7 +62,7 @@ export class PhotosPage implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.getCurrentUser();
     this.getAlbums();
-    this.getPhotos();
+    this.getAllPhotos();
   }
 
   ngAfterViewInit() {
@@ -99,9 +99,8 @@ export class PhotosPage implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
-  getPhotos() {
-    this.photos$ = this.photoService.photos$;
-    this.photos$
+  getAllPhotos() {
+    this.photoService.allPhotos$
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(data => {
         this.allPhotos = data;
@@ -142,13 +141,13 @@ export class PhotosPage implements OnInit, AfterViewInit, OnDestroy {
     this.resetPhotos();
   }
 
-  openPreview(image) {
+  openPreview(photo) {
     this.modalController.create({
       cssClass: 'fullscreen',
       swipeToClose: true,
       component: PhotoModalComponent,
       componentProps: {
-        img: image
+        img: photo
       }
     }).then(modal => {
       modal.present();

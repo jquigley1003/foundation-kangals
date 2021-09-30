@@ -47,7 +47,7 @@ export const registerUser = functions.https.onCall((data, context) => {
       });
     }).then(() => {
       return {
-        result: `${newUserEmail} is now a member. Firebase collection updated!`,
+        result: `${newUserEmail} is now a member. Added to database!`,
       };
     }).catch(() => {
       return {
@@ -92,6 +92,8 @@ export const addAdmin = functions.https.onCall((data, context) => {
     // }
     const userEmail = data.email;
     const userId = data.uid;
+    const fullName = data.firstName + " " + data.lastName;
+
     return grantAdminRole(userId).then(() => {
       const users = admin.firestore().collection("users");
       return users.doc(userId).update({
@@ -100,8 +102,8 @@ export const addAdmin = functions.https.onCall((data, context) => {
         },
       }).then(() => {
         return {
-          result: `Request fulfilled and Firebase collection updated! 
-          ${userEmail} is now an admin.`,
+          result: `${fullName} is now an admin! 
+          ${userEmail} updated.`,
         };
       }).catch((err) => {
         console.log(err);
@@ -122,6 +124,8 @@ export const removeAdmin = functions.https.onCall((data, context) => {
     // }
     const userEmail = data.email;
     const userId = data.uid;
+    const fullName = data.firstName + " " + data.lastName;
+
     return removeAdminRole(userId).then(() => {
       const users = admin.firestore().collection("users");
       return users.doc(userId).update({
@@ -130,8 +134,7 @@ export const removeAdmin = functions.https.onCall((data, context) => {
         },
       }).then(() => {
         return {
-          result: `${userEmail} is no longer an admin. 
-          Firebase collection updated!`,
+          result: `${fullName} removed as admin. ${userEmail} updated.`,
         };
       });
     });

@@ -28,7 +28,7 @@ export class RegisterModalComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', (Validators.required, Validators.pattern('.+\@.+\..+'))],
+      email: ['', (Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'))],
       password: ['', Validators.required]
     });
   }
@@ -50,15 +50,9 @@ export class RegisterModalComponent implements OnInit {
     await this.loadingService.presentLoading(
       'Registering in process...', 'bubbles', 15000);
 
-    this.authService.register(data)
+    await this.authService.register(data)
     .then(async () => {
       this.loadingService.dismissLoading();
-      await this.alertService.presentAlert(
-        'Thank You For Registering!',
-        'We sent you an email for verification.',
-        'Click the link in the email to complete your registration',
-        ['OK']
-      );
       this.router.navigate(['/home']);
       this.authService.signOut();
     }, async err => {
@@ -79,6 +73,22 @@ export class RegisterModalComponent implements OnInit {
       this.passwordShow = true;
       this.passwordType = 'text';
     }
+  }
+
+  get firstName() {
+    return this.registerForm.get('firstName');
+  }
+
+  get lastName() {
+    return this.registerForm.get('lastName');
+  }
+
+  get email() {
+    return this.registerForm.get('email');
+  }
+
+  get password() {
+    return this.registerForm.get('password');
   }
 
   closeModal() {
