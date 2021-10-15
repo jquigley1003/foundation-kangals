@@ -145,3 +145,28 @@ a {
 .dark-shadow-background {
 	background-color: rgba(var(--ion-color-dark-rgb), .4);
 }
+
+.gray-trnsp-button {
+  font-family: 'Snell Roundhand Black', cursive;
+	font-size: 5vh;
+  font-weight: bold;
+	color: black;
+	text-shadow: var(--ion-color-light) 1px 1px 5px;
+  background-color: rgba(var(--ion-color-medium-rgb), .7);
+  border: solid 2px white;
+  border-radius: 10px;
+}
+
+.custom-button {
+  text-align: center;
+  font-family: 'Snell Roundhand Black', cursive;
+	font-size: 5vh;
+  font-weight: bold;
+	color: black;
+	text-shadow: var(--ion-color-light) 1px 1px 5px;
+  width: 50%;
+  margin: 0 auto;
+  width: auto;
+  border: solid 2px white;
+  border-radius: 5px;
+}

@@ -176,4 +176,8 @@ export class HomePage implements OnInit, AfterViewInit {
   goToPurchaseKangals() {
     this.router.navigate(['/purchase-kangals']);
   }
+
+  goToPhotos() {
+    this.router.navigate(['/about-kangals/photos']);
+  }
 }
