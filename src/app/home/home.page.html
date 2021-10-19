@@ -121,9 +121,12 @@
     <!-- END OF BEGINNING OF FK -->
     <!-- NAVIGATION TO OTHER PAGES -->
     <ion-row class="ion-padding">
+      <ion-col size="12">
+      </ion-col>
       <ion-col size="12" class="ion-text-center">
-        <h3 style="color: white;">Click or Press the Paws for More Info &nbsp;
-          <ion-icon color="secondary" slot="end" name="paw"></ion-icon>
+        <h3 style="display:inline-block; color: white;">Click or Press the Paws Below for More Info &nbsp;
+          <!-- <ion-icon color="secondary" slot="end" name="paw"></ion-icon> --> 
+            <img style="vertical-align:middle;" src="../../assets/logos/paw-print-xsmall.png">
         </h3>
       </ion-col>
       <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
@@ -147,7 +150,7 @@
     </ion-row>
     <!-- END OF NAVIGATION TO OTHER PAGES -->
     <!-- GALLERY -->
-    <ion-row>
+    <ion-row class="ion-margin ion-no-padding">
       <ion-col size="12" class="ion-text-center ion-align-self-center">
         <h1 class="white-background">Life on the Farm</h1>
       </ion-col>
@@ -167,7 +170,7 @@
         <img src="https://firebasestorage.googleapis.com/v0/b/foundation-kangals.appspot.com/o/homepage%2FFK05-2021-10-12.jpg?alt=media&token=86bf3976-8299-42de-9125-b7929e4ad965">
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row class="ion-margin ion-no-padding">
       <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4" size-xl="4">
         <img src="https://firebasestorage.googleapis.com/v0/b/foundation-kangals.appspot.com/o/homepage%2FFK06-2021-10-12.jpg?alt=media&token=5d1d8561-ff94-4fa5-9006-a83a30db7adb">
       </ion-col>
@@ -180,7 +183,7 @@
     </ion-row>
     <!-- END OF GALLERY -->
     <!-- PUPPY UPDATE-->
-    <ion-row>
+    <ion-row class="ion-margin ion-no-padding">
       <ion-col size="12" class="ion-text-center ion-align-self-center">
         <h1 class="white-background">Puppy Update - Fall 2021</h1>
       </ion-col>
@@ -193,14 +196,28 @@
         <img src="https://firebasestorage.googleapis.com/v0/b/foundation-kangals.appspot.com/o/homepage%2FFK10-Atilla-2021-10-12.jpg?alt=media&token=f3f41fde-e9bd-4596-b814-e957e9319689">
       </ion-col>
     </ion-row>
-    <!-- PUPPY UPDATE-->
+    <!-- END OF PUPPY UPDATE-->
+    <ion-row class="ion-margin ion-no-padding">
+      <ion-col size="12" class="ion-text-center ion-align-self-center">
+        <div #Oct2021Video01></div>
+      </ion-col>
+    </ion-row>
     <ion-row class="ion-padding ion-margin ion-text-center">
-      <ion-col (click)="goToPhotos()" size-lg="4" offset-lg="4" class="ion-text-center gray-trnsp-button">
+      <ion-col size-md="4" offset-md="4" class="no-background">
+        <ion-item button detail="false" (click)="goToPhotos()"
+        class="ion-margin" lines="none">
+          <h2>More Pictures</h2>
+          <ion-thumbnail slot="end">
+            <img src="../../assets/logos/paw-print.png">
+          </ion-thumbnail>
+        </ion-item>
+      </ion-col>
+      <!-- <ion-col (click)="goToPhotos()" size-lg="4" offset-lg="4" class="ion-text-center gray-trnsp-button">
         <p>More Pictures &nbsp;</p>
         <div style="display: inline-flex;">
           <img src="../../assets/logos/paw-print-small.png">
         </div>
-      </ion-col>
+      </ion-col> -->
     </ion-row>
     <!-- CODE OF ETHICS-->
     <ion-row>

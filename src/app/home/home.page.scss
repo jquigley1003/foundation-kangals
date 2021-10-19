@@ -7,8 +7,12 @@ ion-toolbar {
   --background: transparent;
 }
 
-ion-item { 
-  --background: transparent;
+ion-item {
+  --background: rgba(var(--ion-color-medium-rgb), 0.7);
+  --background-hover-opacity: 0.2;
+  border: 2px solid rgba(var(--ion-color-light-rgb), .7);
+  border-radius: 10px;
+  
 }
 
 ol {
@@ -27,10 +31,10 @@ h1 {
 
 h2 {
   font-family: 'Snell Roundhand Black', cursive;
-	font-size: 2.5em;
+	font-size: 5vh;
   font-weight: bold;
 	color: black;
-	text-shadow: red 2px 2px 5px;
+	text-shadow: var(--ion-color-light) 1px 1px 5px;
 }
 
 a {
