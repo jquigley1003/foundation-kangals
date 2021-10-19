@@ -1,7 +1,9 @@
-import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimationController, Animation, IonSlides } from '@ionic/angular';
 import { DetectMobileService } from '../shared/detect/detect-mobile.service';
+
+import Player from '@vimeo/player';
 
 
 
@@ -21,11 +23,13 @@ export class HomePage implements OnInit, AfterViewInit {
   @ViewChild('mySlideImg6') mySlideImg6: ElementRef;
   @ViewChild('aboutKangals') myAboutKangals: ElementRef;
   @ViewChild('purchaseKangals') myPurchaseKangals: ElementRef;
+  @ViewChild('Oct2021Video01') myOct2021Video01: ElementRef;
 
   logoFullAnim: Animation;
   aboutKangalsAnim: Animation;
   purchaseKangalsAnim: Animation;
   enableScroll: boolean;
+  oct2021Player01: Player;
 
   slideOpts = {
     autoplay: {
@@ -152,6 +156,11 @@ export class HomePage implements OnInit, AfterViewInit {
         { offset: 0.5, transform: 'scale(2)' },
         { offset: 1, transform: 'scale(1)' }
       ]);
+
+      this.oct2021Player01 = new Player(this.myOct2021Video01.nativeElement, {
+        id: 636441683,
+        height: 350
+      });
   }
 
   async aboutKangalsHover() {
